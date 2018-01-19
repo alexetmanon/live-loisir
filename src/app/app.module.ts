@@ -8,7 +8,10 @@ import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
 
 import { TabsComponent } from '../components/tabs/tabs';
-import { MainHeaderComponent } from '../components/main-header/main-header';
+import { MainNavComponent } from '../components/main-nav/main-nav';
+import { DaySelectorComponent } from '../components/day-selector/day-selector';
+
+import { DaySelectorService } from '../services/day-selector.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     MapPage,
     TabsComponent,
-    MainHeaderComponent
+    MainNavComponent,
+    DaySelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -32,13 +36,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SuggestionsPage,
     ListPage,
     MapPage,
-    TabsComponent,
-    MainHeaderComponent
+    TabsComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    DaySelectorService
   ]
 })
 export class AppModule {}
