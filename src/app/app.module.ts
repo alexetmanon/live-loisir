@@ -16,6 +16,8 @@ import { DaySelectorService } from '../services/day-selector.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,6 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    LeafletModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
