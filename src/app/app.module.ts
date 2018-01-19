@@ -6,7 +6,9 @@ import { MyApp } from './app.component';
 import { SuggestionsPage } from '../pages/suggestions/suggestions';
 import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
-import { TabsPage } from '../pages/tabs/tabs';
+
+import { TabsComponent } from '../components/tabs/tabs';
+import { MainHeaderComponent } from '../components/main-header/main-header';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SuggestionsPage,
     ListPage,
     MapPage,
-    TabsPage
+    TabsComponent,
+    MainHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SuggestionsPage,
     ListPage,
     MapPage,
-    TabsPage
+    TabsComponent,
+    MainHeaderComponent
   ],
   providers: [
     StatusBar,
