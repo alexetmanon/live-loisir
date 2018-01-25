@@ -10,6 +10,7 @@ import { MapPage } from '../pages/map/map';
 import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
 import { DaySelectorComponent } from '../components/day-selector/day-selector';
+import { MapComponent } from '../components/map/map';
 
 import { DaySelectorService } from '../services/day-selector.service';
 
@@ -26,7 +27,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     MapPage,
     TabsComponent,
     MainNavComponent,
-    DaySelectorComponent
+    DaySelectorComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
