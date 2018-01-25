@@ -33,19 +33,23 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$live-blue: #4a90e2;
 $live-pink: #f46f7c;
-$live-orange: #f6a330;
+$live-yellow: #f7bd11;
+$live-green: #25bac2;
+$live-green-light: #dff5f6;
 
 $colors: (
-  primary:    #488aff,
+  primary:    $live-green,
   secondary:  #32db64,
-  danger:     #f53d3d,
+  danger:     $live-pink,
   light:      #f4f4f4,
   dark:       #222,
-  map-color:  $live-blue,
-  list-color: $live-pink,
-  suggestions-color: $live-orange
+  map-color: (
+    base: $live-yellow,
+    contrast: #fff
+  ),
+  list-color: $live-green,
+  suggestions-color: $live-pink
 );
 
 
