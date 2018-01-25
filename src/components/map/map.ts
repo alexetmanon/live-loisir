@@ -15,6 +15,7 @@ export class MapComponent {
       })
     ],
     zoom: 14,
-    center: latLng(50.6303889, 3.0556133)
+    zoomControl: false,
+    center: latLng(50.6303889, 3.0556133),
   };
 }
