@@ -15,3 +15,14 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import '../../node_modules/leaflet/dist/leaflet';
+
+// fix bar button padding
+// @see https://github.com/ionic-team/ionic/issues/8607
+.bar-button-md {
+  margin-left: 0.8rem !important;
+  margin-right: 0.8rem !important;
+}
+
+.bar-button-ios {
+  padding: 0 5px !important;
+}
