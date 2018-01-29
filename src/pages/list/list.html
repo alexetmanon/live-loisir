@@ -5,6 +5,11 @@
 <ion-content>
   <day-selector></day-selector>
 
+  <div class="content-loader" *ngIf="!events">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement des évènements cours</p>
+  </div>
+
   <ion-list>
     <ion-item *ngFor="let event of events">
       <ion-thumbnail item-start>
