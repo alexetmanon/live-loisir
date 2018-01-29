@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-const API_BASE = 'http://localhost:8080/';
+const API_BASE = 'http://api.live-loisirs.alexandrebonhomme.fr';
 const EVENTS_END_POINT = '/events';
 
 @Injectable()
