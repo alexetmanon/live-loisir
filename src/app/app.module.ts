@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 
 import { SuggestionsPage } from '../pages/suggestions/suggestions';
@@ -13,6 +14,7 @@ import { DaySelectorComponent } from '../components/day-selector/day-selector';
 import { MapComponent } from '../components/map/map';
 
 import { DaySelectorService } from '../services/day-selector.service';
+import { EventsService } from '../services/events.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,6 +34,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     LeafletModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
@@ -50,7 +53,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
       provide: ErrorHandler,
       useClass: IonicErrorHandler
     },
-    DaySelectorService
+    DaySelectorService,
+    EventsService
   ]
 })
 export class AppModule {}
