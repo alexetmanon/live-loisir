@@ -11,8 +11,12 @@ export class EventsService {
 
   private eventsSubject = new ReplaySubject<any>();
 
-  constructor(http: HttpClient) {
-    http.get(`${API_BASE}${EVENTS_END_POINT}`).subscribe(data => this.eventsSubject.next(data));
+  constructor(private http: HttpClient) {
+    this.refreshEvents();
+  }
+
+  refreshEvents(): void {
+    this.http.get(`${API_BASE}${EVENTS_END_POINT}`).subscribe(data => this.eventsSubject.next(data));
   }
 
   getAll(page: number = 0, perPage: number = 10): Observable<any> {
