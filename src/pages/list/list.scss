@@ -12,6 +12,7 @@ page-list {
   }
 
   .event-category {
+    margin-top: 0;
     text-transform: uppercase;
     font-size: 10px;
     color: $live-pink;
@@ -20,6 +21,8 @@ page-list {
   .event-title {
     font-size: 18px;
     color: $live-green;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .event-description {
@@ -42,6 +45,12 @@ page-list {
   .list .item {
     .item-inner {
       border-bottom: none;
+      align-self: flex-start;
+
+      .label {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
     }
 
     ion-thumbnail {
