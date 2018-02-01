@@ -16,10 +16,6 @@ export class TabsComponent {
   list = ListPage;
   suggestions = SuggestionsPage;
 
-  constructor() {
-
-  }
-
   onChange(tab: any) {
     this.selectedTabIndex = tab.index;
   }

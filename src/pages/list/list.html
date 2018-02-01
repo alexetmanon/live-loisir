@@ -10,14 +10,24 @@
     <p>Chargement des évènements cours</p>
   </div>
 
-  <ion-list>
+  <ion-list padding-vertical>
     <ion-item *ngFor="let event of events">
       <ion-thumbnail item-start>
         <img [src]="event.image">
+
+        <div class="event-time">
+          <ion-icon name="time" color="light"></ion-icon>
+          18:30
+        </div>
       </ion-thumbnail>
-      <h2>{{ event.title }}</h2>
-      <p>{{ event.description }}</p>
-      <button ion-button clear item-end>View</button>
+
+      <h3 class="event-category">{{ event.category || "Général" }}</h3>
+      <h2 class="event-title">{{ event.title }}</h2>
+      <p class="event-description">{{ event.description }}</p>
+      <div class="event-location">
+        <ion-icon name="pin" color="primary"></ion-icon>
+        {{ event.location.address }}
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>

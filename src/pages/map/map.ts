@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { EventsService } from '../../services/events.service';
+import { Observable } from 'rxjs/Observable';
+
+import { Event } from '../../models/event';
 
 @Component({
   selector: 'page-map',
@@ -7,8 +10,10 @@ import { NavController } from 'ionic-angular';
 })
 export class MapPage {
 
-  constructor(public navCtrl: NavController) {
+  events: Observable<Event[]>;
 
+  constructor(eventsService: EventsService) {
+    this.events = eventsService.getAll();
   }
 
 }
