@@ -13,6 +13,8 @@ import { MainNavComponent } from '../components/main-nav/main-nav';
 import { DaySelectorComponent } from '../components/day-selector/day-selector';
 import { MapComponent } from '../components/map/map';
 
+import { IonSegmentHotfix } from '../directives/ion-segment-hotfix';
+
 import { DaySelectorService } from '../services/day-selector.service';
 import { EventsService } from '../services/events.service';
 
@@ -30,7 +32,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     TabsComponent,
     MainNavComponent,
     DaySelectorComponent,
-    MapComponent
+    MapComponent,
+    IonSegmentHotfix
   ],
   imports: [
     BrowserModule,
