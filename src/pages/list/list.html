@@ -3,13 +3,14 @@
 </ion-header>
 
 <ion-content>
-  <day-selector></day-selector>
+  <day-selector [events]="dayEvents"></day-selector>
 
   <div class="content-loader" *ngIf="!events">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
     <p>Chargement des évènements cours</p>
   </div>
 
+  {{ events.length }}
   <ion-list padding-vertical>
     <ion-item *ngFor="let event of events">
       <ion-thumbnail item-start>
@@ -21,7 +22,7 @@
         </div>
       </ion-thumbnail>
 
-      <h3 class="event-category">{{ event.category || "Général" }}</h3>
+      <h3 class="event-category">{{ event.category || "Évènement" }}</h3>
       <h2 class="event-title">{{ event.title }}</h2>
       <p class="event-description">{{ event.description }}</p>
       <div class="event-location">

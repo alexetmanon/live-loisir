@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { DaySelectorService } from '../../services/day-selector.service';
+import { DayEvents } from '../../models/day-events';
 
 @Component({
   selector: 'day-selector',
@@ -10,11 +11,14 @@ export class DaySelectorComponent {
 
   currentDay: string;
 
+  @Input()
+  events: DayEvents[];
+
   constructor(private daySelectorService: DaySelectorService) {
     this.daySelectorService.asObservable().subscribe(day => this.currentDay = day);
   }
 
-  onChanged(day: string) {
-    this.daySelectorService.set(day);
+  onChanged(dayNumber: string) {
+    this.daySelectorService.set(dayNumber);
   }
 }

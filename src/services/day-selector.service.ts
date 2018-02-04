@@ -5,11 +5,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class DaySelectorService {
 
-  // TODO : enum for days
-  private subject = new BehaviorSubject<string>('lundi');
+  private subject = new BehaviorSubject<string>('1');
 
-  set(day: string): void {
-    this.subject.next(day);
+  constructor() {
+    this.set(((new Date()).getDay()).toString());
+  }
+
+  set(dayNumber: string): void {
+    this.subject.next(dayNumber);
   }
 
   asObservable(): Observable<string> {

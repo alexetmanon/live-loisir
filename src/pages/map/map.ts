@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { EventsService } from '../../services/events.service';
-import { Observable } from 'rxjs/Observable';
-
 import { Event } from '../../models/event';
+import { DayEvents } from '../../models/day-events';
 
 @Component({
   selector: 'page-map',
@@ -10,10 +9,12 @@ import { Event } from '../../models/event';
 })
 export class MapPage {
 
-  events: Observable<Event[]>;
+  dayEvents: DayEvents[] = [];
+  events: Event[] = [];
 
   constructor(eventsService: EventsService) {
-    this.events = eventsService.getAll();
+    eventsService.getAll().subscribe(data => this.dayEvents = data);
+    eventsService.getDayEvents().subscribe(data => this.events = data);
   }
 
 }
