@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ event?.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="content-loader" *ngIf="!event">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement du détail de l'évènement en cours</p>
+  </div>
+
+  <div *ngIf="event">
+    {{ event | json }}
+  </div>
+
+</ion-content>
