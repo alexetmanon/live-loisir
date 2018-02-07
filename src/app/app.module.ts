@@ -17,11 +17,13 @@ import { IonSegmentHotfix } from '../directives/ion-segment-hotfix';
 
 import { DaySelectorService } from '../services/day-selector.service';
 import { EventsService } from '../services/events.service';
+import { ItineraryService } from '../services/itinerary.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
       useClass: IonicErrorHandler
     },
     DaySelectorService,
-    EventsService
+    EventsService,
+    ItineraryService
   ]
 })
 export class AppModule {}
