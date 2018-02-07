@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { tileLayer, latLng, marker, icon, point, Marker } from 'leaflet';
 
 import { Event } from '../../models/event';
@@ -16,7 +15,7 @@ export class MapComponent {
   private markers: Marker[] = [];
 
   // map options
-  options: any = {
+  options = {
     layers: [
       // tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}')
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
@@ -39,13 +38,16 @@ export class MapComponent {
     return this.markers;
   }
 
+  @Output()
+  onMarkerClicked = new EventEmitter<Event>();
+
   /**
    *
    * @param {Event} event
    * @returns {Marker}
    */
   private buildMarker(event: Event): Marker {
-    return marker(latLng(event.location.latitude, event.location.longitude), {
+    let markerObject = marker(latLng(event.location.latitude, event.location.longitude), {
       icon: icon({
         iconUrl: 'assets/imgs/pin-general.png',
         iconRetinaUrl: 'assets/imgs/pin-general@2x.png',
@@ -53,6 +55,11 @@ export class MapComponent {
         iconAnchor: point(32, 27)
       })
     });
+
+    // emit event corresponding to the clicked marker
+    markerObject.on('click', () => this.onMarkerClicked.emit(event));
+
+    return markerObject;
   }
 
 }

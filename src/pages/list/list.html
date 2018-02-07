@@ -12,7 +12,7 @@
 
   {{ events.length }}
   <ion-list padding-vertical>
-    <ion-item *ngFor="let event of events">
+    <ion-item *ngFor="let event of events" (click)="onClick(event)">
       <ion-thumbnail item-start>
         <img [src]="event.image">
 
