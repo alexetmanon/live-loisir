@@ -8,7 +8,7 @@ import { Event } from '../models/event';
 import { DayEvents } from '../models/day-events';
 import { DaySelectorService } from './day-selector.service';
 
-const API_BASE = 'http://api.live-loisirs.alexandrebonhomme.fr';
+const API_BASE = 'http://api.live-loisirs.alexetmanon.fr';
 const EVENTS_END_POINT = '/events/7days';
 
 @Injectable()
