@@ -47,8 +47,8 @@ export class MapComponent {
   private buildMarker(event: Event): Marker {
     return marker(latLng(event.location.latitude, event.location.longitude), {
       icon: icon({
-        iconUrl: 'assets/imgs/pin-theatre.png',
-        iconRetinaUrl: 'assets/imgs/pin-theatre@2x.png',
+        iconUrl: 'assets/imgs/pin-general.png',
+        iconRetinaUrl: 'assets/imgs/pin-general@2x.png',
         iconSize: point(35, 55),
         iconAnchor: point(32, 27)
       })
