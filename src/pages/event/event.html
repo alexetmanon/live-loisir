@@ -6,13 +6,22 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="content-loader" *ngIf="!event">
+  <!-- <div class="content-loader" *ngIf="!event">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
     <p>Chargement du détail de l'évènement en cours</p>
   </div>
 
   <div *ngIf="event">
     {{ event | json }}
+  </div> -->
+
+  <div class="content-loader" *ngIf="!itineraries">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement des itinéraires en cours</p>
+  </div>
+
+  <div *ngIf="itineraries">
+    {{ itineraries | json }}
   </div>
 
 </ion-content>

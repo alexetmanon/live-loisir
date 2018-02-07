@@ -14,28 +14,33 @@ import { LatLng } from 'leaflet';
 export class EventPage {
 
   event: Event;
+  itineraries: any;
 
   constructor(
-    private navCtrl: NavController,
     navParams: NavParams,
     itineraryService: ItineraryService
   ) {
-    this.event = navParams.get('event');
+    this.event = <Event>navParams.get('event');
 
-    // itineraryService.get(
-    //   new LatLng(50.6216869, 3.0612344),
-    //   new LatLng(50.6429089, 3.0719164),
-    //   {
-    //     datetime: (new Date()).toISOString(),
-    //     // beforeDatetime: true,
-    //     sectionModes: [
-    //       TransportMode.Bike,
-    //       TransportMode.Walking
-    //     ],
-    //     publicModes: [
-    //       PublicTransportMode.Tramway
-    //     ]
-    //   }
-    // ).subscribe(console.log);
+    itineraryService
+      .get(
+        new LatLng(50.6216869, 3.0612344),
+        new LatLng(this.event.location.latitude, this.event.location.longitude),
+        {
+          datetime: (new Date()).toISOString(),
+          // beforeDatetime: true,
+          sectionModes: [
+            TransportMode.Bike,
+            TransportMode.Walking
+          ],
+          publicModes: [
+            PublicTransportMode.Tramway
+          ]
+        }
+      )
+      .subscribe(data => {
+        console.log(data)
+        this.itineraries = data
+      });
   }
 }
