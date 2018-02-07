@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { ItineraryService } from '../../services/itinerary.service';
@@ -7,7 +7,6 @@ import { TransportMode, PublicTransportMode } from '../../enums/transport-mode';
 
 import { LatLng } from 'leaflet';
 
-@IonicPage()
 @Component({
   selector: 'page-event',
   templateUrl: 'event.html',
@@ -39,9 +38,4 @@ export class EventPage {
     //   }
     // ).subscribe(console.log);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EventPage');
-  }
-
 }
