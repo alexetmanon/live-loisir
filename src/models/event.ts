@@ -6,6 +6,7 @@ export class Event {
   constructor(
     public title: string,
     public description: string,
+    public longDescription: string,
     public url: string,
     public image: string,
     public category: string,
