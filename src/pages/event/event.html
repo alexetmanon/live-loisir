@@ -1,7 +1,6 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ event?.title }}</ion-title>
+<ion-header [ngStyle]="{'background-image': 'url(' + event.image + ')'}">
+  <ion-navbar color="primary">
+    <ion-title>{{ event.title }}</ion-title>
   </ion-navbar>
 </ion-header>
 
