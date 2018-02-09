@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 import { EventsService } from '../../services/events.service';
 import { Event } from '../../models/event';
 import { DayEvents } from '../../models/day-events';
@@ -10,20 +10,23 @@ import { EventPage } from '../event/event';
   templateUrl: 'list.html'
 })
 export class ListPage {
+  private navController: NavController;
 
   dayEvents: DayEvents[] = [];
   events: Event[] = [];
 
   constructor(
     eventsService: EventsService,
-    private navCtrl: NavController
+    private app: App
   ) {
+    this.navController = app.getRootNavs()[0];
+
     eventsService.getAll().subscribe(data => this.dayEvents = data);
     eventsService.getDayEvents().subscribe(data => this.events = data);
   }
 
   onClick(event: Event): void {
-    this.navCtrl.push(EventPage, {
+    this.navController.push(EventPage, {
       event: event
     });
   }

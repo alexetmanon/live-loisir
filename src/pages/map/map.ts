@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 
 import { EventsService } from '../../services/events.service';
 import { Event } from '../../models/event';
@@ -12,15 +12,17 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'map.html'
 })
 export class MapPage {
+  private navController: NavController;
 
   dayEvents: DayEvents[] = [];
   events: Event[] = [];
-  selectedEvent: Observable<Event>;
 
   constructor(
     eventsService: EventsService,
-    private navCtrl: NavController
+    app: App
    ) {
+    this.navController = app.getRootNavs()[0];
+
     eventsService.getAll().subscribe(data => this.dayEvents = data);
     eventsService.getDayEvents().subscribe(data => this.events = data);
   }
@@ -30,7 +32,7 @@ export class MapPage {
    * @param event
    */
   onMarkerClicked(event: Event): void {
-    this.navCtrl.push(EventPage, {
+    this.navController.push(EventPage, {
       event: event
     });
   }
