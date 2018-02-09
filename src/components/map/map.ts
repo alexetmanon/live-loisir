@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { tileLayer, latLng, marker, icon, point, Marker } from 'leaflet';
 
 import { Event } from '../../models/event';
@@ -41,6 +41,8 @@ export class MapComponent {
   @Output()
   onMarkerClicked = new EventEmitter<Event>();
 
+  constructor(private ngZone: NgZone) {}
+
   /**
    *
    * @param {Event} event
@@ -57,7 +59,12 @@ export class MapComponent {
     });
 
     // emit event corresponding to the clicked marker
-    markerObject.on('click', () => this.onMarkerClicked.emit(event));
+    markerObject.on('click',
+      // get back into zone
+      () => this.ngZone.run(
+        () => this.onMarkerClicked.emit(event)
+      )
+    );
 
     return markerObject;
   }
