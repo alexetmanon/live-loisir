@@ -29,4 +29,33 @@ page-event {
 
     }
   }
+
+  .event-details {
+    ion-icon {
+      font-size: 1.6em;
+    }
+  }
+
+  .itinerary-selector {
+    background-color: rgba(237, 237, 237, 0.41);
+  }
+
+  .event-itineraries {
+    .item {
+      padding-left: 0;
+    }
+
+    .itinerary-icon ion-icon {
+      font-size: 1.6em;
+    }
+
+    .itinerary-price {
+      padding-right: 20px !important;
+    }
+
+    .itinerary-duration,
+    .itinerary-price {
+      font-size: 14px;
+    }
+  }
 }
