@@ -5,6 +5,6 @@
 <ion-content>
   <div class="container">
     <day-selector [events]="dayEvents"></day-selector>
-    <map [events]="events"></map>
+    <map [events]="events" (onMarkerClicked)="onMarkerClicked($event)"></map>
   </div>
 </ion-content>

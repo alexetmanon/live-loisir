@@ -1,0 +1,61 @@
+page-event {
+  ion-header {
+    height: 186px;
+    background-size: cover;
+
+    ion-navbar {
+      height: 100%;
+
+      .toolbar-background {
+        background: transparent !important;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.0), #105256 86%) !important;
+      }
+
+      .back-button {
+        align-self: flex-start;
+      }
+
+      .toolbar-content {
+        align-self: flex-end;
+        padding-bottom: 25px;
+
+        .toolbar-title {
+          color: #fff;
+          text-overflow: initial;
+          white-space: normal;
+          font-size: 2.4rem;
+        }
+      }
+
+    }
+  }
+
+  .event-details {
+    ion-icon {
+      font-size: 1.6em;
+    }
+  }
+
+  .itinerary-selector {
+    background-color: rgba(237, 237, 237, 0.41);
+  }
+
+  .event-itineraries {
+    .item {
+      padding-left: 0;
+    }
+
+    .itinerary-icon ion-icon {
+      font-size: 1.6em;
+    }
+
+    .itinerary-price {
+      padding-right: 20px !important;
+    }
+
+    .itinerary-duration,
+    .itinerary-price {
+      font-size: 14px;
+    }
+  }
+}

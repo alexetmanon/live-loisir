@@ -7,12 +7,12 @@
 
   <div class="content-loader" *ngIf="!events">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
-    <p>Chargement des évènements cours</p>
+    <p>Chargement des évènements en cours</p>
   </div>
 
   {{ events.length }}
   <ion-list padding-vertical>
-    <ion-item *ngFor="let event of events">
+    <ion-item *ngFor="let event of events" (click)="onClick(event)">
       <ion-thumbnail item-start>
         <img [src]="event.image">
 
