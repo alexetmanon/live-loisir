@@ -6,6 +6,7 @@ import { ItineraryService } from '../../services/itinerary.service';
 import { TransportMode, PublicTransportMode } from '../../enums/transport-mode';
 
 import { LatLng } from 'leaflet';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-event',
@@ -19,13 +20,14 @@ export class EventPage {
 
   constructor(
     navParams: NavParams,
-    itineraryService: ItineraryService
+    itineraryService: ItineraryService,
+    geolocationService: Geolocation
   ) {
     this.event = <Event>navParams.get('event');
 
-    itineraryService
-      .get(
-        new LatLng(50.6216869, 3.0612344),
+    geolocationService.getCurrentPosition().then(position => {
+      itineraryService.get(
+        new LatLng(position.coords.latitude, position.coords.longitude),
         new LatLng(this.event.location.latitude, this.event.location.longitude),
         {
           datetime: (new Date()).toISOString(),
@@ -40,10 +42,10 @@ export class EventPage {
             PublicTransportMode.Bus
           ]
         }
-      )
-      .subscribe(data => {
+      ).subscribe(data => {
         this.itineraries = data.journeys
       });
+    }).catch(error => console.log('Error getting location', error));
   }
 
   formatDuration(durationInSecond: number): string {
