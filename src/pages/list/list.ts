@@ -17,7 +17,7 @@ export class ListPage {
 
   constructor(
     eventsService: EventsService,
-    private app: App
+    app: App
   ) {
     this.navController = app.getRootNavs()[0];
 

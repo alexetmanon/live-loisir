@@ -5,7 +5,6 @@ import { EventsService } from '../../services/events.service';
 import { Event } from '../../models/event';
 import { DayEvents } from '../../models/day-events';
 import { EventPage } from '../event/event';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-map',
