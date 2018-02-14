@@ -8,6 +8,8 @@ import { Event } from '../models/event';
 import { DayEvents } from '../models/day-events';
 import { DaySelectorService } from './day-selector.service';
 
+import * as moment from 'moment';
+
 const API_BASE = 'http://api.live-loisirs.alexetmanon.fr';
 const EVENTS_END_POINT = '/events/7days';
 
@@ -34,7 +36,15 @@ export class EventsService {
           return error;
         })
       )
-      .subscribe((events: DayEvents[]) => this.eventsSubject.next(events));
+      .subscribe((dayEvents: DayEvents[]) => {
+        dayEvents = dayEvents.map(dayEvent => {
+          dayEvent.events = dayEvent.events.map(event => this.populateStartAndEndTime(event, dayEvent.date));
+
+          return dayEvent;
+        })
+
+        this.eventsSubject.next(dayEvents);
+      });
   }
 
   getAll(page: number = 0, perPage: number = 10): Observable<DayEvents[]> {
@@ -79,5 +89,24 @@ export class EventsService {
     const filteredEvents = events.filter(dayEvent => dayEvent.dayNumber.toString() === dayNumber);
 
     return filteredEvents && filteredEvents.length ? filteredEvents[0].events : [];
+  }
+
+  /**
+   * return an event with startTime and dateTime field with data from timings array
+   *
+   * @param event
+   * @param date
+   */
+  private populateStartAndEndTime(event: Event, date: Date): Event {
+    let current = moment(date);
+
+    let todayTiming = event.timings.filter(timing => current.isSame(timing.start, 'day') && current.isSame(timing.end, 'day'));
+
+    if (todayTiming.length >= 1) {
+      event.startTime = todayTiming[0].start;
+      event.endTime = todayTiming[0].end;
+    }
+
+    return event;
   }
 }
