@@ -15,6 +15,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 export class EventPage {
 
   event: Event;
+  eventMapCenter: LatLng;
 
   itineraryDirection: string = 'forward';
 
@@ -27,6 +28,7 @@ export class EventPage {
     geolocationService: Geolocation
   ) {
     this.event = <Event>navParams.get('event');
+    this.eventMapCenter = new LatLng(this.event.location.latitude, this.event.location.longitude)
 
     geolocationService.getCurrentPosition().then(position => {
       this.loadsItineraries(new LatLng(position.coords.latitude, position.coords.longitude), this.event);

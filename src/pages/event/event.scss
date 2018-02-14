@@ -63,4 +63,12 @@ page-event {
       font-size: 14px;
     }
   }
+
+  map {
+    height: 140px;
+
+    .leaflet-container {
+      height: 100%;
+    }
+  }
 }
