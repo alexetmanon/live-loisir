@@ -37,18 +37,21 @@
       <p>Calcul des itinéraires en cours</p>
     </div>
 
-    <ion-list *ngIf="itineraries">
+    <ion-list>
       <ion-item *ngFor="let itinerary of itineraries" detail-push>
         <ion-grid no-padding>
           <ion-row align-items-center>
             <ion-col class="itinerary-icon" col-2 text-center>
-              <ion-icon name="bicycle"></ion-icon>
+              <ion-icon [name]="itinerary.icon"></ion-icon>
             </ion-col>
-            <ion-col class="itinerary-duration">{{ formatDuration(itinerary.duration) }}</ion-col>
-            <ion-col class="itinerary-price" text-right>{{ formatPrice(itinerary.fare) }}</ion-col>
+            <ion-col class="itinerary-duration">{{ itinerary.duration }}</ion-col>
+            <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
           </ion-row>
         </ion-grid>
-        <button ion-button clear item-end>Choisir</button>
+        <button color="dark" ion-button clear item-end icon-end>
+          Choisir
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
       </ion-item>
     </ion-list>
   </div>
