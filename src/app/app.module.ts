@@ -8,6 +8,7 @@ import { SuggestionsPage } from '../pages/suggestions/suggestions';
 import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
 import { EventPage } from '../pages/event/event';
+import { ItineraryPage } from '../pages/itinerary/itinerary';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
@@ -34,6 +35,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     ListPage,
     MapPage,
     EventPage,
+    ItineraryPage,
     TabsComponent,
     MainNavComponent,
     DaySelectorComponent,
@@ -53,7 +55,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     ListPage,
     MapPage,
     EventPage,
-    TabsComponent
+    TabsComponent,
+    ItineraryPage
   ],
   providers: [
     StatusBar,
