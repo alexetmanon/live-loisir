@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 import { SuggestionsPage } from '../pages/suggestions/suggestions';
 import { ListPage } from '../pages/list/list';
@@ -27,6 +29,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
+// register french locale
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
