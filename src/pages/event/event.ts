@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { ItineraryService } from '../../services/itinerary.service';
+import { ItineraryPage } from '../itinerary/itinerary';
 
 import { LatLng } from 'leaflet';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -21,6 +22,7 @@ export class EventPage {
 
   constructor(
     navParams: NavParams,
+    private navController: NavController,
     private itineraryService: ItineraryService,
     geolocationService: Geolocation
   ) {
@@ -108,5 +110,12 @@ export class EventPage {
     }
 
     return `${price} €`;
+  }
+
+  openItinerary(itinerary: any): void {
+    this.navController.push(ItineraryPage, {
+      event: this.event,
+      itinerary: itinerary
+    });
   }
 }
