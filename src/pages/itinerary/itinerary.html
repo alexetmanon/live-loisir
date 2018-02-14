@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Itinéraire</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="event-details">
+    <ion-row>
+      <ion-col col-2 text-center no-padding [ngStyle]="{'background-image': 'url(' + event.image + ')'}">
+      </ion-col>
+      <ion-col>
+        <h1>{{ event.title }}</h1>
+        <ion-grid class="event-details">
+          <ion-row>
+            <ion-col col-1 text-center>
+              <ion-icon name="pin"></ion-icon>
+            </ion-col>
+            <ion-col>{{ event.location.address }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-segment [(ngModel)]="itineraryDirection" class="itinerary-selector bg-green-light" color="dark">
+    <ion-segment-button value="forward">Trajet aller</ion-segment-button>
+    <ion-segment-button value="backward">Trajet retour</ion-segment-button>
+  </ion-segment>
+
+  <ion-list class="itinerary-details">
+    <div class="bg-green itinerary-direction" padding-left padding-top>
+      Itinéraire {{ itineraryDirection === 'forward' ? 'aller' : 'retour' }}
+    </div>
+    <ion-item class="bg-green" no-padding no-lines>
+      <ion-grid no-padding>
+        <ion-row align-items-center>
+          <ion-col class="itinerary-icon" col-2 text-center>
+            <ion-icon [name]="itinerary.icon"></ion-icon>
+          </ion-col>
+          <ion-col class="itinerary-duration">{{ itinerary.duration }}</ion-col>
+          <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <button color="light" ion-button clear item-end>
+        <ion-icon name="create"></ion-icon>
+      </button> -->
+    </ion-item>
+
+    <ion-list-header *ngIf="itinerary.sections">Itinéraire</ion-list-header>
+    <ion-item no-padding no-lines *ngFor="let section of itinerary.sections" [ngClass]="{
+      'bg-green-light': section.type === 'walk' || section.type === 'wait'
+    }">
+      <ion-grid no-padding>
+        <ion-row align-items-center>
+          <ion-col class="itinerary-icon" col-2 text-center>
+            <ion-icon [name]="section.icon"></ion-icon>
+          </ion-col>
+
+          <ion-col col-4 *ngIf="section.type === 'wait'">Attendre</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'walk'">Marcher</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'bike'">Vélo</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'vlille'">V'Lille</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'subway'">Métro {{ section.transportLabel }}</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'bus'">Bus {{ section.transportLabel }}</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'tram'">Tram {{ section.transportLabel }}</ion-col>
+
+          <ion-col class="itinerary-duration" col-5 text-right>{{ section.duration }}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="section.direction">
+          <ion-col class="section-name" offset-2>
+            Direction <strong>{{ section.direction }}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="section.to && section.to.stop_point">
+          <ion-col class="section-name" offset-2>
+            Arrêt <strong>{{ section.to.name }}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="section.to && section.to.address">
+            <ion-col class="section-name" offset-2>
+              {{ section.to.address.label }}
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

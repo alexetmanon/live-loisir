@@ -48,11 +48,13 @@
             <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
           </ion-row>
         </ion-grid>
-        <button color="dark" ion-button clear item-end icon-end>
+        <button color="dark" ion-button clear item-end icon-end (click)="openItinerary(itinerary)">
           Choisir
           <ion-icon name="ios-arrow-forward"></ion-icon>
         </button>
       </ion-item>
     </ion-list>
   </div>
+
+  <map [events]="event" [center]="eventMapCenter"></map>
 </ion-content>

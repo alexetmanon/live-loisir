@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { tileLayer, latLng, marker, icon, point, Marker } from 'leaflet';
+import { tileLayer, latLng, marker, icon, point, Marker, LatLng } from 'leaflet';
 
 import { Event } from '../../models/event';
 
@@ -18,7 +18,8 @@ export class MapComponent {
   options = {
     layers: [
       // tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}')
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+      // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+      tileLayer('https://api.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmxja3NocmsiLCJhIjoiY2pkbXRxemJzMG1qYjJ5cDJnYzZkcWdvciJ9.T_Yp_y3P8LdAxYBx5P8ZmA')
     ],
     zoom: ZOOM_DEFAULT,
     zoomControl: false,
@@ -26,16 +27,25 @@ export class MapComponent {
   };
 
   @Input()
-  set events(events: Event[]) {
+  set events(events: Event[]|Event) {
     if (!events) {
       return;
     }
 
-    this.markers = events.map(event => this.buildMarker(event));
+    if (Array.isArray(events)) {
+      this.markers = events.map(event => this.buildMarker(event));
+    } else {
+      this.markers = [this.buildMarker(events)];
+    }
   };
 
   get layers(): Marker[] {
     return this.markers;
+  }
+
+  @Input()
+  set center(center: LatLng) {
+    this.options.center = center;
   }
 
   @Output()

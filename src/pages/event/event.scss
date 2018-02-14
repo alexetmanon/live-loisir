@@ -41,6 +41,10 @@ page-event {
   }
 
   .event-itineraries {
+    .list {
+      margin-bottom: 0;
+    }
+
     .item {
       padding-left: 0;
 
@@ -61,6 +65,14 @@ page-event {
     .itinerary-duration,
     .itinerary-price {
       font-size: 14px;
+    }
+  }
+
+  map {
+    height: 140px;
+
+    .leaflet-container {
+      height: 100%;
     }
   }
 }
