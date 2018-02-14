@@ -38,7 +38,10 @@ export class EventsService {
       )
       .subscribe((dayEvents: DayEvents[]) => {
         dayEvents = dayEvents.map(dayEvent => {
-          dayEvent.events = dayEvent.events.map(event => this.populateStartAndEndTime(event, dayEvent.date));
+          dayEvent.events = dayEvent.events
+            .map(event => this.populateStartAndEndTime(event, dayEvent.date))
+            // EXTREMLY DIRTY TRICK TO FIX API BUG
+            .filter(event => event.timings.length === 0 || event.startTime);
 
           return dayEvent;
         })
