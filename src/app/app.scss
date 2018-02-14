@@ -49,3 +49,12 @@
     margin: 0;
   }
 }
+
+.bg-green {
+  background-color: $live-green;
+  color: color($colors, light);
+}
+
+.bg-green-light {
+  background-color: $live-green-light;
+}
