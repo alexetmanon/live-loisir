@@ -156,15 +156,6 @@ export class ItineraryService {
     return `${duration} minute${duration > 1 ? 's' : ''}`;
   }
 
-  private formatPrice(fare: any): string {
-    let price = '--';
-    if (fare && fare.total && fare.total.value) {
-      price = fare.total.value.replace('.', ',');
-    }
-
-    return `${price} €`;
-  }
-
   /**
    *
    * @param from
