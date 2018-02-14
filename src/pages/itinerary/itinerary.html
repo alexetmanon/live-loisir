@@ -59,9 +59,11 @@
 
           <ion-col col-4 *ngIf="section.type === 'wait'">Attendre</ion-col>
           <ion-col col-4 *ngIf="section.type === 'walk'">Marcher</ion-col>
-          <ion-col col-4 *ngIf="section.type === 'subway'">Métro</ion-col>
-          <ion-col col-4 *ngIf="section.type === 'bus'">Bus</ion-col>
-          <ion-col col-4 *ngIf="section.type === 'tram'">Tram</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'bike'">Vélo</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'vlille'">V'Lille</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'subway'">Métro {{ section.transportLabel }}</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'bus'">Bus {{ section.transportLabel }}</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'tram'">Tram {{ section.transportLabel }}</ion-col>
 
           <ion-col class="itinerary-duration" col-5 text-right>{{ section.duration }}</ion-col>
         </ion-row>

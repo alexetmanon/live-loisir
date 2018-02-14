@@ -39,7 +39,7 @@ export class ItineraryService {
         ...data[0].map(itinerary => this.formatItinerary(itinerary, 'subway')),
         ...data[1].map(itinerary => this.formatItinerary(itinerary, 'walk', 0)),
         ...data[2].map(itinerary => this.formatItinerary(itinerary, 'bicycle', 0)),
-        ...data[3].map(itinerary => this.formatItinerary(itinerary, 'car', 0)),
+        ...data[3].map(itinerary => this.formatItinerary(itinerary, 'car')),
       ]
       .sort((a, b) => a.duration - b.duration)
       .map(itinerary => {
@@ -68,6 +68,7 @@ export class ItineraryService {
       ...options,
       sectionModes: [
         // TransportMode.Bike,
+        TransportMode.BakeSharingSystem,
         TransportMode.Walking
       ],
       publicModes: [
@@ -89,7 +90,7 @@ export class ItineraryService {
     return {
       icon: iconName,
       duration: itinerary.duration,
-      price: price ? `${price} €` : '-- €',
+      price: price !== undefined ? `${price} €` : '-- €',
       sections: sections
     }
   }
@@ -101,6 +102,14 @@ export class ItineraryService {
     if (section.mode === 'walking' || section.transfer_type === 'walking') {
       iconName = 'walk';
       type = 'walk';
+    }
+    else if (section.mode === 'bike' || section.transfer_type === 'bike') {
+      iconName = 'bicycle';
+      type = 'bike';
+    }
+    else if (section.mode === 'bss' || section.transfer_type === 'bss') {
+      iconName = 'bycicle';
+      type = 'vlille';
     }
     else if (section.type === 'waiting') {
       iconName = 'man';
@@ -134,6 +143,7 @@ export class ItineraryService {
       icon: iconName,
       type: type,
       direction: section.display_informations ? section.display_informations.direction : undefined,
+      transportLabel: section.display_informations ? section.display_informations.label : undefined,
       from: section.from,
       to: section.to,
       duration: this.formatDuration(section.duration)
@@ -197,6 +207,7 @@ export class ItineraryService {
     forbiddenModes.forEach(mode => {
       params = params.append('forbidden_uris[]', mode);
     });
+    params = params.append('direct_path', 'none');
 
     if (options.departure) {
       params = params.append('datetime', options.departure);
