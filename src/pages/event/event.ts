@@ -3,9 +3,9 @@ import { NavParams } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { ItineraryService } from '../../services/itinerary.service';
-import { TransportMode, PublicTransportMode } from '../../enums/transport-mode';
 
 import { LatLng } from 'leaflet';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-event',
@@ -14,36 +14,85 @@ import { LatLng } from 'leaflet';
 export class EventPage {
 
   event: Event;
-  itineraries: any;
+
   itineraryDirection: string = 'forward';
+
+  itineraries: any[];
 
   constructor(
     navParams: NavParams,
-    itineraryService: ItineraryService
+    private itineraryService: ItineraryService,
+    geolocationService: Geolocation
   ) {
     this.event = <Event>navParams.get('event');
 
-    itineraryService
-      .get(
-        new LatLng(50.6216869, 3.0612344),
-        new LatLng(this.event.location.latitude, this.event.location.longitude),
-        {
-          datetime: (new Date()).toISOString(),
-          // beforeDatetime: true,
-          sectionModes: [
-            // TransportMode.Bike,
-            TransportMode.Walking
-          ],
-          publicModes: [
-            PublicTransportMode.Tramway,
-            PublicTransportMode.Metro,
-            PublicTransportMode.Bus
-          ]
-        }
-      )
-      .subscribe(data => {
-        this.itineraries = data.journeys
+    geolocationService.getCurrentPosition().then(position => {
+      this.loadsItineraries(new LatLng(position.coords.latitude, position.coords.longitude), this.event);
+    }).catch(error => {
+      // TODO: add toast
+      console.log('Error getting location', error)
+    });
+  }
+
+  private loadsItineraries(position: LatLng, event: Event, direction: string = 'forward') {
+    let from = new LatLng(position.lat, position.lng);
+    let to = new LatLng(event.location.latitude, event.location.longitude);
+
+    // we do not have start/end time for now
+    let options = (direction === 'forward') ? {
+      departure: (new Date()).toISOString()
+    } : {
+      departure: (new Date()).toISOString()
+      // arrival: (new Date()).toISOString()
+    };
+
+    Promise.all([
+      this.itineraryService
+        .getPublicTransportsItinerary(from, to, options)
+        .then(data => data.journeys),
+
+      this.itineraryService
+        .getWalkingItinerary(from, to, options)
+        .then(data => data.routes),
+
+      this.itineraryService
+        .getCyclingItinerary(from, to, options)
+        .then(data => data.routes),
+
+      this.itineraryService
+        .getDrivingItinerary(from, to, options)
+        .then(data => data.routes)
+    ]).then(data => {
+      this.itineraries = [
+        ...data[0].map(itinerary => Object.create({
+          'icon': 'subway',
+          'duration': itinerary.duration,
+          // 'price': this.formatPrice(itinerary.price)
+          'price': '-- €'
+        })),
+        ...data[1].map(itinerary => Object.create({
+          'icon': 'walk',
+          'duration': itinerary.duration,
+          'price': '0 €'
+        })),
+        ...data[2].map(itinerary => Object.create({
+          'icon': 'bicycle',
+          'duration': itinerary.duration,
+          'price': '0 €'
+        })),
+        ...data[3].map(itinerary => Object.create({
+          'icon': 'car',
+          'duration': itinerary.duration,
+          'price': '-- €'
+        })),
+      ]
+      .sort((a, b) => a.duration - b.duration)
+      .map(itinerary => {
+        itinerary.duration = this.formatDuration(itinerary.duration);
+
+        return itinerary;
       });
+    });
   }
 
   formatDuration(durationInSecond: number): string {
@@ -53,9 +102,9 @@ export class EventPage {
   }
 
   formatPrice(fare: any): string {
-    let price = '0.0';
+    let price = '--';
     if (fare && fare.total && fare.total.value) {
-      price = fare.total.value;
+      price = fare.total.value.replace('.', ',');
     }
 
     return `${price} €`;
