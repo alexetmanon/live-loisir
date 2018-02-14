@@ -47,15 +47,39 @@
       </button> -->
     </ion-item>
 
-    <ion-item no-padding no-lines *ngFor="let step of itinerary.steps">
+    <ion-list-header *ngIf="itinerary.sections">Itinéraire</ion-list-header>
+    <ion-item no-padding no-lines *ngFor="let section of itinerary.sections" [ngClass]="{
+      'bg-green-light': section.type === 'walk' || section.type === 'wait'
+    }">
       <ion-grid no-padding>
         <ion-row align-items-center>
           <ion-col class="itinerary-icon" col-2 text-center>
-            <ion-icon [name]="itinerary.icon"></ion-icon>
+            <ion-icon [name]="section.icon"></ion-icon>
           </ion-col>
-          <ion-col class="itinerary-duration">{{ itinerary.duration }}</ion-col>
-          <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
+
+          <ion-col col-4 *ngIf="section.type === 'wait'">Attendre</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'walk'">Marcher</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'subway'">Métro</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'bus'">Bus</ion-col>
+          <ion-col col-4 *ngIf="section.type === 'tram'">Tram</ion-col>
+
+          <ion-col class="itinerary-duration" col-5 text-right>{{ section.duration }}</ion-col>
         </ion-row>
+        <ion-row *ngIf="section.direction">
+          <ion-col class="section-name" offset-2>
+            Direction <strong>{{ section.direction }}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="section.to && section.to.stop_point">
+          <ion-col class="section-name" offset-2>
+            Arrêt <strong>{{ section.to.name }}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="section.to && section.to.address">
+            <ion-col class="section-name" offset-2>
+              {{ section.to.address.label }}
+            </ion-col>
+          </ion-row>
       </ion-grid>
     </ion-item>
   </ion-list>

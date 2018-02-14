@@ -20,6 +20,36 @@ export class ItineraryService {
 
   constructor(private http: HttpClient) {}
 
+  getItineraries(from: LatLng, to: LatLng, options?: any): Promise<any> {
+    return Promise.all([
+      this
+        .getPublicTransportsItinerary(from, to, options)
+        .then(data => data.journeys),
+      this
+        .getWalkingItinerary(from, to, options)
+        .then(data => data.routes),
+      this
+        .getCyclingItinerary(from, to, options)
+        .then(data => data.routes),
+      this
+        .getDrivingItinerary(from, to, options)
+        .then(data => data.routes)
+    ]).then(data => {
+      return [
+        ...data[0].map(itinerary => this.formatItinerary(itinerary, 'subway')),
+        ...data[1].map(itinerary => this.formatItinerary(itinerary, 'walk', 0)),
+        ...data[2].map(itinerary => this.formatItinerary(itinerary, 'bicycle', 0)),
+        ...data[3].map(itinerary => this.formatItinerary(itinerary, 'car', 0)),
+      ]
+      .sort((a, b) => a.duration - b.duration)
+      .map(itinerary => {
+        itinerary.duration = this.formatDuration(itinerary.duration);
+
+        return itinerary;
+      });
+    });
+  }
+
   getDrivingItinerary(from: LatLng, to: LatLng, options?: any): Promise<any> {
     // return this.mapboxItinerary(from, to, 'driving', options).toPromise();
     return this.mapboxItinerary(from, to, 'driving-traffic', options).toPromise();
@@ -48,6 +78,81 @@ export class ItineraryService {
     };
 
     return this.navitiaItinerary(from, to, options).toPromise();
+  }
+
+  private formatItinerary(itinerary: any, iconName: string, price?: number): any {
+    let sections = itinerary.sections;
+    if (sections) {
+      sections = sections.map(section => this.formatSection(section));
+    }
+
+    return {
+      icon: iconName,
+      duration: itinerary.duration,
+      price: price ? `${price} €` : '-- €',
+      sections: sections
+    }
+  }
+
+  private formatSection(section: any): any {
+    let iconName = '';
+    let type = '';
+
+    if (section.mode === 'walking' || section.transfer_type === 'walking') {
+      iconName = 'walk';
+      type = 'walk';
+    }
+    else if (section.type === 'waiting') {
+      iconName = 'man';
+      type = 'wait';
+    }
+    else if (section.type === 'public_transport' && section.display_informations) {
+      switch (section.display_informations.physical_mode) {
+        case 'Métro':
+          iconName = 'subway';
+          type = 'subway';
+          break;
+
+        case 'Bus':
+          iconName = 'bus';
+          type = 'bus';
+          break;
+
+        case 'Tram':
+          iconName = 'train';
+          type = 'tram';
+          break;
+
+        default:
+          iconName = 'subway';
+          type = 'subway';
+          break;
+      }
+    }
+
+    return {
+      icon: iconName,
+      type: type,
+      direction: section.display_informations ? section.display_informations.direction : undefined,
+      from: section.from,
+      to: section.to,
+      duration: this.formatDuration(section.duration)
+    }
+  }
+
+  private formatDuration(durationInSecond: number): string {
+    const duration = durationInSecond > 0 ? Math.round(durationInSecond / 60) : 0;
+
+    return `${duration} minute${duration > 1 ? 's' : ''}`;
+  }
+
+  private formatPrice(fare: any): string {
+    let price = '--';
+    if (fare && fare.total && fare.total.value) {
+      price = fare.total.value.replace('.', ',');
+    }
+
+    return `${price} €`;
   }
 
   /**
