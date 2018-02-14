@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { tileLayer, latLng, marker, icon, point, Marker } from 'leaflet';
+import { tileLayer, latLng, marker, icon, point, Marker, LatLng } from 'leaflet';
 
 import { Event } from '../../models/event';
 
@@ -27,16 +27,25 @@ export class MapComponent {
   };
 
   @Input()
-  set events(events: Event[]) {
+  set events(events: Event[]|Event) {
     if (!events) {
       return;
     }
 
-    this.markers = events.map(event => this.buildMarker(event));
+    if (Array.isArray(events)) {
+      this.markers = events.map(event => this.buildMarker(event));
+    } else {
+      this.markers = [this.buildMarker(events)];
+    }
   };
 
   get layers(): Marker[] {
     return this.markers;
+  }
+
+  @Input()
+  set center(center: LatLng) {
+    this.options.center = center;
   }
 
   @Output()
