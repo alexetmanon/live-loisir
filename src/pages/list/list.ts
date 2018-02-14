@@ -12,8 +12,8 @@ import { EventPage } from '../event/event';
 export class ListPage {
   private navController: NavController;
 
-  dayEvents: DayEvents[] = [];
-  events: Event[] = [];
+  dayEvents: DayEvents[];
+  events: Event[];
 
   constructor(
     eventsService: EventsService,
@@ -22,6 +22,7 @@ export class ListPage {
     this.navController = app.getRootNavs()[0];
 
     eventsService.getAll().subscribe(data => this.dayEvents = data);
+
     eventsService.getDayEvents().subscribe(data => this.events = data);
   }
 
