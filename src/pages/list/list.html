@@ -16,12 +16,7 @@
       <ion-thumbnail item-start>
         <img [src]="event.image">
 
-        <div class="event-time" *ngIf="event.startTime">
-          <ion-icon name="time" color="light"></ion-icon>
-          {{ event.startTime | date:'shortTime':'':'fr' }}
-        </div>
-
-        <div class="event-date" *ngIf="!event.startTime && event.endDate">
+        <div class="event-date">
           <ion-icon name="ios-arrow-forward" color="primary"></ion-icon>
           {{ event.endDate | date:'dd/MM':'':'fr' }}
         </div>
@@ -30,6 +25,12 @@
       <h3 class="event-category">{{ event.category || "Évènement" }}</h3>
       <h2 class="event-title">{{ event.title }}</h2>
       <p class="event-description">{{ event.description }}</p>
+
+      <div class="event-time" *ngIf="event.startTime">
+        <ion-icon name="time" color="primary"></ion-icon>
+        {{ event.startTime | date:'shortTime':'':'fr' }} - {{ event.endTime | date:'shortTime':'':'fr' }}
+      </div>
+
       <div class="event-location">
         <ion-icon name="pin" color="primary"></ion-icon>
         {{ event.location.address }}
