@@ -11,6 +11,19 @@ page-list {
     padding: 5px 8px;
   }
 
+  .event-date {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    transform: translate3d(0, 50%, 0);
+    border: 1px solid $live-green;
+    background-color: #fff;
+    color: $live-green;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 8px;
+  }
+
   .event-category {
     margin-top: 0;
     text-transform: uppercase;
