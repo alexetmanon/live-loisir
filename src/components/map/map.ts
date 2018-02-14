@@ -18,7 +18,8 @@ export class MapComponent {
   options = {
     layers: [
       // tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}')
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+      // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+      tileLayer('https://api.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmxja3NocmsiLCJhIjoiY2pkbXRxemJzMG1qYjJ5cDJnYzZkcWdvciJ9.T_Yp_y3P8LdAxYBx5P8ZmA')
     ],
     zoom: ZOOM_DEFAULT,
     zoomControl: false,
