@@ -22,6 +22,14 @@ page-map {
         flex: 1;
       }
     }
+
+    ion-fab[top] {
+      top: 54px;
+    }
+
+    .fab ion-icon {
+      color: color($colors, dark);
+    }
   }
 
   event-card {

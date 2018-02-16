@@ -6,6 +6,11 @@
   <div class="container">
     <day-selector [events]="dayEvents"></day-selector>
     <map [events]="events" (onMarkerClicked)="onMarkerClicked($event)"></map>
+    <ion-fab top right>
+      <button ion-fab color="light">
+        <ion-icon name="locate"></ion-icon>
+      </button>
+    </ion-fab>
   </div>
   <event-card [event]="selectedEvent"></event-card>
 
