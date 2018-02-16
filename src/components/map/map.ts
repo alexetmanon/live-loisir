@@ -3,6 +3,7 @@ import { tileLayer, latLng, marker, icon, point, Marker, LatLng } from 'leaflet'
 
 import { Event } from '../../models/event';
 import { AppSettings } from '../../app/app.settings';
+import { Category } from '../../enums/category';
 
 const TOURCOING_LATLNG = latLng(50.7226638, 3.1519897);
 const ZOOM_DEFAULT = 14;
@@ -71,12 +72,7 @@ export class MapComponent {
    */
   private buildMarker(event: Event): Marker {
     let markerObject = marker(latLng(event.location.latitude, event.location.longitude), {
-      icon: icon({
-        iconUrl: 'assets/imgs/pin-general.png',
-        iconRetinaUrl: 'assets/imgs/pin-general@2x.png',
-        iconSize: point(35, 55),
-        iconAnchor: point(32, 27)
-      })
+      icon: this.iconFromCategory(event.category)
     });
 
     // emit event corresponding to the clicked marker
@@ -88,6 +84,34 @@ export class MapComponent {
     );
 
     return markerObject;
+  }
+
+  private iconFromCategory(category?: string) {
+    switch (category) {
+      case Category.Outside:
+        return icon({
+          iconUrl: 'assets/imgs/pin-musee.png',
+          iconRetinaUrl: 'assets/imgs/pin-musee@2x.png',
+          iconSize: point(35, 55),
+          iconAnchor: point(32, 27)
+        });
+
+      case Category.Show:
+        return icon({
+          iconUrl: 'assets/imgs/pin-theatre.png',
+          iconRetinaUrl: 'assets/imgs/pin-theatre@2x.png',
+          iconSize: point(35, 55),
+          iconAnchor: point(32, 27)
+        });
+
+      default:
+        return icon({
+          iconUrl: 'assets/imgs/pin-general.png',
+          iconRetinaUrl: 'assets/imgs/pin-general@2x.png',
+          iconSize: point(35, 55),
+          iconAnchor: point(32, 27)
+        });
+    }
   }
 
 }
