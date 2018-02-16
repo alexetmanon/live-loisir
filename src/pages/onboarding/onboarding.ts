@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'onboarding',
+  selector: 'page-onboarding',
   templateUrl: 'onboarding.html'
 })
 export class OnboardingPage {
+  constructor(
+    private navController: NavController
+  ) {}
 
-
+  close() {
+    this.navController.pop();
+  }
 }
