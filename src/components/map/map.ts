@@ -6,6 +6,8 @@ import { Event } from '../../models/event';
 const TOURCOING_LATLNG = latLng(50.7226638, 3.1519897);
 const ZOOM_DEFAULT = 14;
 
+const MAPBOX_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A';
+
 @Component({
   selector: 'map',
   templateUrl: 'map.html'
@@ -17,9 +19,14 @@ export class MapComponent {
   // map options
   options = {
     layers: [
-      // tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}')
       // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-      tileLayer('https://api.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmxja3NocmsiLCJhIjoiY2pkbXRxemJzMG1qYjJ5cDJnYzZkcWdvciJ9.T_Yp_y3P8LdAxYBx5P8ZmA')
+      tileLayer(
+        `https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}{retina}.png?access_token=${MAPBOX_TOKEN}`,
+        {
+          retina: '@2x',
+          detectRetina: true
+        }
+      )
     ],
     zoom: ZOOM_DEFAULT,
     zoomControl: false,
