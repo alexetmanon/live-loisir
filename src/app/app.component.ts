@@ -11,7 +11,7 @@ import { OnboardingPage } from '../pages/onboarding/onboarding';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild('content') navController;
+  @ViewChild('content') navController: NavController;
 
   rootPage:any = TabsComponent;
 
