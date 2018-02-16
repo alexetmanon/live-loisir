@@ -18,5 +18,6 @@ export class ItineraryPage {
   ) {
     this.event = <Event>navParams.get('event');
     this.itinerary = navParams.get('itinerary');
+    this.itineraryDirection = navParams.get('itineraryDirection');
   }
 }

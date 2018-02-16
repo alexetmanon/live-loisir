@@ -19,7 +19,8 @@ export class EventPage {
 
   itineraryDirection: string = 'forward';
 
-  itineraries: any[];
+  forwardItineraries: any[];
+  backwardItineraries: any[];
 
   constructor(
     navParams: NavParams,
@@ -44,21 +45,43 @@ export class EventPage {
     });
   }
 
-  private loadsItineraries(position: LatLng, event: Event, direction: string = 'forward') {
+  private loadsItineraries(position: LatLng, event: Event) {
     let from = new LatLng(position.lat, position.lng);
     let to = new LatLng(event.location.latitude, event.location.longitude);
 
-    // we do not have start/end time for now
-    let options = (direction === 'forward') ? {
-      departure: (new Date()).toISOString()
-    } : {
-      departure: (new Date()).toISOString()
-      // arrival: (new Date()).toISOString()
-    };
+    let forwardOptions;
+    let backwardOptions;
 
+    if (event.startTime) {
+      forwardOptions = {
+        arrival: event.startTime
+      };
+    }
+
+    if (event.endTime) {
+      backwardOptions = {
+        departure: event.endTime
+      };
+    }
+
+    // compute forward itineraries
     this.itineraryService
-      .getItineraries(from, to, options)
-      .then(itineraries => this.itineraries = itineraries)
+      .getItineraries(from, to, forwardOptions)
+      .then(itineraries => this.forwardItineraries = itineraries)
+      .catch(error => {
+        console.log('Error computing intineraries', error);
+
+        this.toastController.create({
+          message: 'Impossible de calculer les itinéraires',
+          showCloseButton: true,
+          closeButtonText: 'Fermer'
+        }).present();
+      });
+
+    // compute backward itineraries
+    this.itineraryService
+      .getItineraries(to, from, backwardOptions)
+      .then(itineraries => this.backwardItineraries = itineraries)
       .catch(error => {
         console.log('Error computing intineraries', error);
 
@@ -73,7 +96,8 @@ export class EventPage {
   openItinerary(itinerary: any): void {
     this.navController.push(ItineraryPage, {
       event: this.event,
-      itinerary: itinerary
+      itinerary: itinerary,
+      itineraryDirection: this.itineraryDirection
     });
   }
 }
