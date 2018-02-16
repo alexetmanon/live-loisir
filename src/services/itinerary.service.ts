@@ -19,6 +19,21 @@ export class ItineraryService {
   constructor(private http: HttpClient) {}
 
   getItineraries(from: LatLng, to: LatLng, options?: any): Promise<any> {
+    options = options || {};
+
+    // if departure is before current time
+    if (options.departure && moment().isAfter(options.departure)) {
+      // we set departure at current time
+      options.departure = new Date().toISOString();
+    }
+
+    // if the arrival time is before current time
+    if (options.arrival && moment().isAfter(options.arrival)) {
+      // we remove arrival and set departure instead
+      options.arrival = undefined;
+      options.departure = new Date().toISOString();
+    }
+
     return Promise.all([
       this
         .getPublicTransportsItinerary(from, to, options)
