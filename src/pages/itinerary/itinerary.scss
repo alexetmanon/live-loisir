@@ -51,5 +51,18 @@ page-itinerary {
     .section-name {
       font-size: 14px;
     }
+
+    .itinerary-warning {
+      color: color($colors, danger);
+      font-size: 12px;
+
+      & > * {
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        margin-right: 4px;
+      }
+    }
   }
 }

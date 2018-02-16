@@ -50,6 +50,9 @@
     <ion-list-header *ngIf="itinerary.sections">
       <div>Itinéraire</div>
       <div class="itinerary-starttime">Partir à {{ itinerary.sections[0]?.start | date:'shortTime':'':'fr' }}</div>
+      <div class="itinerary-warning" *ngIf="!event.startTime">
+        <ion-icon color="danger" name="alert"></ion-icon>Horraire de l'évènement indisponible
+      </div>
     </ion-list-header>
     <ion-item no-padding no-lines *ngFor="let section of itinerary.sections" [ngClass]="{
       'bg-green-light': section.type === 'walk' || section.type === 'wait'
