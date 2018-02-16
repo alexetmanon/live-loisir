@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { OnboardingPage } from '../pages/onboarding/onboarding';
@@ -17,7 +18,8 @@ export class MyApp {
   constructor(
     platform: Platform,
     statusBar: StatusBar,
-    splashScreen: SplashScreen
+    splashScreen: SplashScreen,
+    private storage: Storage
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -28,6 +30,13 @@ export class MyApp {
   }
 
   ngAfterViewInit() {
-    this.navController.push(OnboardingPage);
+    // check localstorage before diplay onboarding
+    this.storage.get('onboarding').then(value => {
+      if (value === 'done') {
+        return;
+      }
+
+      this.navController.push(OnboardingPage);
+    });
   }
 }
