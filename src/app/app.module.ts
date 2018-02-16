@@ -11,6 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
 import { EventPage } from '../pages/event/event';
 import { ItineraryPage } from '../pages/itinerary/itinerary';
+import { OnboardingPage } from '../pages/onboarding/onboarding';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
@@ -46,7 +47,8 @@ registerLocaleData(localeFr);
     DaySelectorComponent,
     MapComponent,
     IonSegmentHotfix,
-    EventCardComponent
+    EventCardComponent,
+    OnboardingPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ registerLocaleData(localeFr);
     MapPage,
     EventPage,
     TabsComponent,
-    ItineraryPage
+    ItineraryPage,
+    OnboardingPage
   ],
   providers: [
     StatusBar,
