@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { SuggestionsPage } from '../pages/suggestions/suggestions';
 import { ListPage } from '../pages/list/list';
@@ -54,6 +55,7 @@ registerLocaleData(localeFr);
     BrowserModule,
     HttpClientModule,
     LeafletModule.forRoot(),
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
