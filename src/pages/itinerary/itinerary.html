@@ -7,11 +7,11 @@
 <ion-content>
   <ion-grid class="event-details">
     <ion-row>
-      <ion-col col-2 text-center no-padding [ngStyle]="{'background-image': 'url(' + event.image + ')'}">
+      <ion-col class="event-image" col-2 text-center no-padding [ngStyle]="{'background-image': 'url(' + event.image + ')'}">
       </ion-col>
       <ion-col>
         <h1>{{ event.title }}</h1>
-        <ion-grid class="event-details">
+        <ion-grid class="event-address">
           <ion-row>
             <ion-col col-1 text-center>
               <ion-icon name="pin"></ion-icon>
