@@ -1,0 +1,71 @@
+event-card {
+  display: block;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+
+  .event-date {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    transform: translate3d(0, 50%, 0);
+    border: 1px solid $live-green;
+    background-color: #fff;
+    color: $live-green;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 8px;
+  }
+
+  .event-category {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: $live-pink;
+  }
+
+  .event-title {
+    font-size: 18px;
+    white-space: normal;
+  }
+
+  .event-location,
+  .event-time {
+    font-size: 12px;
+    white-space: normal;
+    margin-top: 6px;
+
+    ion-icon {
+      vertical-align: bottom;
+    }
+  }
+
+  // override thumbnail image size
+  .item.item-block {
+    padding: 0;
+    align-items: flex-start;
+
+    .item-inner {
+      border-bottom: none;
+      padding: 0;
+
+      .label {
+        margin: 8px 0 0 0;
+      }
+    }
+
+    ion-thumbnail {
+      position: relative;
+      margin-bottom: 16px;
+
+      ion-img,
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  .event-card-button {
+    border-top: 1px solid #ededed;
+    // padding: 8px;
+  }
+}

@@ -7,4 +7,5 @@
     <day-selector [events]="dayEvents"></day-selector>
     <map [events]="events" (onMarkerClicked)="onMarkerClicked($event)"></map>
   </div>
+  <event-card [event]="selectedEvent"></event-card>
 </ion-content>

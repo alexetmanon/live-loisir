@@ -16,6 +16,7 @@ import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
 import { DaySelectorComponent } from '../components/day-selector/day-selector';
 import { MapComponent } from '../components/map/map';
+import { EventCardComponent } from '../components/event-card/event-card';
 
 import { IonSegmentHotfix } from '../directives/ion-segment-hotfix';
 
@@ -44,7 +45,8 @@ registerLocaleData(localeFr);
     MainNavComponent,
     DaySelectorComponent,
     MapComponent,
-    IonSegmentHotfix
+    IonSegmentHotfix,
+    EventCardComponent
   ],
   imports: [
     BrowserModule,
