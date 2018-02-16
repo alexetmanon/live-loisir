@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams, NavController, ToastController } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { ItineraryService } from '../../services/itinerary.service';
@@ -25,7 +25,8 @@ export class EventPage {
     navParams: NavParams,
     private navController: NavController,
     private itineraryService: ItineraryService,
-    geolocationService: Geolocation
+    geolocationService: Geolocation,
+    private toastController: ToastController
   ) {
     this.event = <Event>navParams.get('event');
     this.eventMapCenter = new LatLng(this.event.location.latitude, this.event.location.longitude)
@@ -33,8 +34,13 @@ export class EventPage {
     geolocationService.getCurrentPosition().then(position => {
       this.loadsItineraries(new LatLng(position.coords.latitude, position.coords.longitude), this.event);
     }).catch(error => {
-      // TODO: add toast
       console.log('Error getting location', error)
+
+      this.toastController.create({
+        message: 'Impossible de calculer récupérer votre position',
+        showCloseButton: true,
+        closeButtonText: 'Fermer'
+      }).present();
     });
   }
 
@@ -52,7 +58,16 @@ export class EventPage {
 
     this.itineraryService
       .getItineraries(from, to, options)
-      .then(itineraries => this.itineraries = itineraries);
+      .then(itineraries => this.itineraries = itineraries)
+      .catch(error => {
+        console.log('Error computing intineraries', error);
+
+        this.toastController.create({
+          message: 'Impossible de les itinéraires',
+          showCloseButton: true,
+          closeButtonText: 'Fermer'
+        }).present();
+      });
   }
 
   openItinerary(itinerary: any): void {
