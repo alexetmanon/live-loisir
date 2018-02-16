@@ -3,7 +3,6 @@ import { App, NavController } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { EventPage } from '../../pages/event/event';
-import { AppSettings } from '../../app/app.settings';
 
 @Component({
   selector: 'event-card',
