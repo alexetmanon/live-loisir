@@ -15,7 +15,7 @@ export class MapComponent {
 
   private markers: Marker[] = [];
 
-  // map options
+  mapCenter: LatLng;
   options = {
     layers: [
       // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
@@ -33,6 +33,16 @@ export class MapComponent {
   };
 
   @Input()
+  set center(position: LatLng) {
+    if (!position) {
+      return;
+    }
+
+    this.mapCenter = position;
+    this.options.center = position;
+  };
+
+  @Input()
   set events(events: Event[]|Event) {
     if (!events) {
       return;
@@ -43,15 +53,10 @@ export class MapComponent {
     } else {
       this.markers = [this.buildMarker(events)];
     }
-  };
+  }
 
   get layers(): Marker[] {
     return this.markers;
-  }
-
-  @Input()
-  set center(center: LatLng) {
-    this.options.center = center;
   }
 
   @Output()
