@@ -8,7 +8,8 @@
     <map [events]="events" [center]="mapCenter" (onMarkerClicked)="onMarkerClicked($event)"></map>
     <ion-fab top right>
       <button ion-fab color="light" (click)="refreshLocation()">
-        <ion-icon name="locate"></ion-icon>
+        <ion-icon *ngIf="!isLocationRefreshing" name="locate"></ion-icon>
+        <ion-spinner *ngIf="isLocationRefreshing"  name="crescent"></ion-spinner>
       </button>
     </ion-fab>
   </div>

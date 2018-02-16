@@ -17,6 +17,7 @@ export class MapPage {
   selectedEvent: Event;
 
   mapCenter: LatLng;
+  isLocationRefreshing: boolean = false;
 
   constructor(
     eventsService: EventsService,
@@ -36,9 +37,11 @@ export class MapPage {
   }
 
   refreshLocation() {
+    this.isLocationRefreshing = true;
     this.geolocationService.getCurrentPosition().then(position => {
-      console.log(position)
       this.mapCenter = new LatLng(position.coords.latitude, position.coords.longitude);
+
+      this.isLocationRefreshing = false;
     }).catch(error => {
       console.log('Error getting location', error)
 
@@ -47,6 +50,8 @@ export class MapPage {
         showCloseButton: true,
         closeButtonText: 'Fermer'
       }).present();
+
+      this.isLocationRefreshing = false;
     });
   }
 }
