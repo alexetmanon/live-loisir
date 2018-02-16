@@ -86,6 +86,11 @@ export class MapComponent {
     return markerObject;
   }
 
+  /**
+   *
+   * @param {string} category
+   * @returns {Icon}
+   */
   private iconFromCategory(category?: string) {
     switch (category) {
       case Category.Outside:
