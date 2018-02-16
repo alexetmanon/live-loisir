@@ -3,6 +3,10 @@ page-onboarding {
     background-image: linear-gradient(to bottom, #25bac2 0%, #75dbe1);
   }
 
+  .onboarding-image {
+    margin: -40px 0;
+  }
+
   .onboarding-text {
     margin: 0;
     padding: 0 64px;
@@ -24,11 +28,6 @@ page-onboarding {
     .swiper-pagination-bullet-active {
       background: #fff;
     }
-  }
-
-  .slide-zoom {
-    height: 100%;
-    padding-top: 80px;
   }
 
   .button {
