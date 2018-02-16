@@ -10,7 +10,7 @@ import { DaySelectorService } from './day-selector.service';
 
 import * as moment from 'moment';
 
-const API_BASE = 'http://api.live-loisirs.alexetmanon.fr';
+const API_BASE = 'https://api.live-loisirs.alexetmanon.fr';
 const EVENTS_END_POINT = '/events/7days';
 
 @Injectable()
