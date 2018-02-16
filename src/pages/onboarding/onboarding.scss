@@ -1,0 +1,37 @@
+page-onboarding {
+  ion-content {
+    background-image: linear-gradient(to bottom, #25bac2 0%, #75dbe1);
+  }
+
+  .onboarding-text {
+    margin: 0;
+    padding: 0 64px;
+    font-size: 16px;
+	  text-align: center;
+	  color: #fff;
+  }
+
+  .swiper-pagination {
+    padding: 16px 0;
+
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background: #25bac2;
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #fff;
+    }
+  }
+
+  .slide-zoom {
+    height: 100%;
+    padding-top: 80px;
+  }
+
+  .button {
+    color: color($colors, primary);
+  }
+}

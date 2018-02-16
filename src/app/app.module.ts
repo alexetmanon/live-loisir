@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { SuggestionsPage } from '../pages/suggestions/suggestions';
 import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
 import { EventPage } from '../pages/event/event';
 import { ItineraryPage } from '../pages/itinerary/itinerary';
+import { OnboardingPage } from '../pages/onboarding/onboarding';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
@@ -46,12 +48,14 @@ registerLocaleData(localeFr);
     DaySelectorComponent,
     MapComponent,
     IonSegmentHotfix,
-    EventCardComponent
+    EventCardComponent,
+    OnboardingPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     LeafletModule.forRoot(),
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -62,7 +66,8 @@ registerLocaleData(localeFr);
     MapPage,
     EventPage,
     TabsComponent,
-    ItineraryPage
+    ItineraryPage,
+    OnboardingPage
   ],
   providers: [
     StatusBar,

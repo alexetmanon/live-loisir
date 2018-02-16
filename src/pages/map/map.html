@@ -8,4 +8,9 @@
     <map [events]="events" (onMarkerClicked)="onMarkerClicked($event)"></map>
   </div>
   <event-card [event]="selectedEvent"></event-card>
+
+  <div class="content-loader" *ngIf="!events">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement des évènements en cours</p>
+  </div>
 </ion-content>

@@ -37,7 +37,7 @@ export class EventPage {
       console.log('Error getting location', error)
 
       this.toastController.create({
-        message: 'Impossible de calculer récupérer votre position',
+        message: 'Impossible récupérer votre position',
         showCloseButton: true,
         closeButtonText: 'Fermer'
       }).present();
@@ -63,7 +63,7 @@ export class EventPage {
         console.log('Error computing intineraries', error);
 
         this.toastController.create({
-          message: 'Impossible de les itinéraires',
+          message: 'Impossible de calculer les itinéraires',
           showCloseButton: true,
           closeButtonText: 'Fermer'
         }).present();
