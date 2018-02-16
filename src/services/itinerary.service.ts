@@ -4,16 +4,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { TransportMode, PublicTransportMode } from '../enums/transport-mode';
+import { AppSettings } from '../app/app.settings';
 
 import { LatLng } from 'leaflet';
 
-const NAVITIA_API_BASE = 'https://api.navitia.io/v1';
 const NAVITIA_API_ENDPOINT = '/coverage/fr-npdc/journeys';
-// const API_TOKEN = '8b0348d6-1dcf-4980-b65b-62f75479b9f2';
-const NAVITIA_API_TOKEN = 'c8034b39-a6ed-41fb-8ea3-904f2b2e8069'; // Transpole token, oops!
 
-const MAPBOX_API_BASE = 'https://api.mapbox.com/directions/v5/mapbox';
-const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYmxja3NocmsiLCJhIjoiY2pkbXRxemJzMG1qYjJ5cDJnYzZkcWdvciJ9.T_Yp_y3P8LdAxYBx5P8ZmA';
+const MAPBOX_DIRECTION_ENDPOINT = '/directions/v5/mapbox';
 
 @Injectable()
 export class ItineraryService {
@@ -165,10 +162,10 @@ export class ItineraryService {
    */
   private mapboxItinerary(from: LatLng, to: LatLng, mode: string, options?: any): Observable<any> {
     let params = new HttpParams();
-    params = params.append('access_token', `${MAPBOX_API_TOKEN}`);
+    params = params.append('access_token', `${AppSettings.MAPBOX.API_TOKEN}`);
     params = params.append('language', 'fr');
 
-    return this.http.get(`${MAPBOX_API_BASE}/${mode}/${from.lng},${from.lat};${to.lng},${to.lat}`, {
+    return this.http.get(`${AppSettings.MAPBOX.API_BASE}${MAPBOX_DIRECTION_ENDPOINT}/${mode}/${from.lng},${from.lat};${to.lng},${to.lat}`, {
       params: params
     });
   }
@@ -207,9 +204,9 @@ export class ItineraryService {
       params = params.append('datetime_represents', 'arrival');
     }
 
-    return this.http.get(`${NAVITIA_API_BASE}${NAVITIA_API_ENDPOINT}`, {
+    return this.http.get(`${AppSettings.NAVITIA.API_BASE}${NAVITIA_API_ENDPOINT}`, {
       headers: {
-        Authorization: `${NAVITIA_API_TOKEN}`
+        Authorization: `${AppSettings.NAVITIA.API_TOKEN}`
       },
       params: params
     });

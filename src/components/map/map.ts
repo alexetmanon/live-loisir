@@ -2,11 +2,10 @@ import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { tileLayer, latLng, marker, icon, point, Marker, LatLng } from 'leaflet';
 
 import { Event } from '../../models/event';
+import { AppSettings } from '../../app/app.settings';
 
 const TOURCOING_LATLNG = latLng(50.7226638, 3.1519897);
 const ZOOM_DEFAULT = 14;
-
-const MAPBOX_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A';
 
 @Component({
   selector: 'map',
@@ -21,7 +20,7 @@ export class MapComponent {
     layers: [
       // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
       tileLayer(
-        `https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}{retina}.png?access_token=${MAPBOX_TOKEN}`,
+        `https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}{retina}.png?access_token=${AppSettings.MAPBOX.API_TOKEN}`,
         {
           retina: '@2x',
           detectRetina: true

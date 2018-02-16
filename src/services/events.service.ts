@@ -7,10 +7,10 @@ import { map, withLatestFrom, catchError } from 'rxjs/operators';
 import { Event } from '../models/event';
 import { DayEvents } from '../models/day-events';
 import { DaySelectorService } from './day-selector.service';
+import { AppSettings } from '../app/app.settings';
 
 import * as moment from 'moment';
 
-const API_BASE = 'https://api.live-loisirs.alexetmanon.fr';
 const EVENTS_END_POINT = '/events/7days';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class EventsService {
 
   refreshEvents(): void {
     this.http
-      .get(`${API_BASE}${EVENTS_END_POINT}`)
+      .get(`${AppSettings.API_BASE}${EVENTS_END_POINT}`)
       .pipe(
         map(data => <DayEvents[]>data),
         catchError(error => {
