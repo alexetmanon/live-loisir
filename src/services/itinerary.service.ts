@@ -7,6 +7,7 @@ import { TransportMode, PublicTransportMode } from '../enums/transport-mode';
 import { AppSettings } from '../app/app.settings';
 
 import { LatLng } from 'leaflet';
+import * as moment from 'moment';
 
 const NAVITIA_API_ENDPOINT = '/coverage/fr-npdc/journeys';
 
@@ -143,6 +144,8 @@ export class ItineraryService {
       transportLabel: section.display_informations ? section.display_informations.label : undefined,
       from: section.from,
       to: section.to,
+      start: moment(section.departure_date_time).toDate(),
+      end: moment(section.arrival_date_time).toDate(),
       duration: this.formatDuration(section.duration)
     }
   }

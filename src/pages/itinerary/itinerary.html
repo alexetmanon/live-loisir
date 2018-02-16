@@ -47,7 +47,10 @@
       </button> -->
     </ion-item>
 
-    <ion-list-header *ngIf="itinerary.sections">Itinéraire</ion-list-header>
+    <ion-list-header *ngIf="itinerary.sections">
+      <div>Itinéraire</div>
+      <div class="itinerary-starttime">Partir à {{ itinerary.sections[0]?.start | date:'shortTime':'':'fr' }}</div>
+    </ion-list-header>
     <ion-item no-padding no-lines *ngFor="let section of itinerary.sections" [ngClass]="{
       'bg-green-light': section.type === 'walk' || section.type === 'wait'
     }">
