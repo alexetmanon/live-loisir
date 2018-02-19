@@ -97,7 +97,7 @@ export class EventPage {
     this.navController.push(ItineraryPage, {
       event: this.event,
       itinerary: itinerary,
-      itineraryDirection: this.itineraryDirection
+      itineraryDirection: <string>(this.itineraryDirection) // bugfix ion-segment bad varible type
     });
   }
 }
