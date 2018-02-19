@@ -23,11 +23,6 @@
     </ion-row>
   </ion-grid>
 
-  <ion-segment [(ngModel)]="itineraryDirection" class="itinerary-selector bg-green-light" color="dark">
-    <ion-segment-button value="forward" [disabled]="itineraryDirection === 'backward'">Trajet aller</ion-segment-button>
-    <ion-segment-button value="backward" [disabled]="itineraryDirection === 'forward'">Trajet retour</ion-segment-button>
-  </ion-segment>
-
   <ion-list class="itinerary-details">
     <div class="bg-green itinerary-direction" padding-left padding-top>
       Itinéraire {{ itineraryDirection === 'forward' ? 'aller' : 'retour' }}
