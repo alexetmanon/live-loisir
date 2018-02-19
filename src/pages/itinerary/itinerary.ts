@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 
 import { Event } from '../../models/event';
+import { LatLng } from 'leaflet';
+import { ItineraryMapPage } from '../itinerary-map/itinerary-map';
 
 @Component({
   selector: 'page-itinerary',
@@ -14,10 +16,17 @@ export class ItineraryPage {
   itinerary: any;
 
   constructor(
-    navParams: NavParams
+    navParams: NavParams,
+    private navController: NavController
   ) {
     this.event = <Event>navParams.get('event');
     this.itinerary = navParams.get('itinerary');
     this.itineraryDirection = navParams.get('itineraryDirection');
+  }
+
+  openMap(to: any) {
+    this.navController.push(ItineraryMapPage, {
+      to: to
+    })
   }
 }

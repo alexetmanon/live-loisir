@@ -66,8 +66,15 @@
           <ion-col col-4 *ngIf="section.type === 'bus'">Bus {{ section.transportLabel }}</ion-col>
           <ion-col col-4 *ngIf="section.type === 'tram'">Tram {{ section.transportLabel }}</ion-col>
 
-          <ion-col class="itinerary-duration" col-5 text-right>{{ section.duration }}</ion-col>
+          <ion-col class="itinerary-duration" col-4 text-right>{{ section.duration }}</ion-col>
+
+          <ion-col *ngIf="section.to && (section.type === 'walk' || section.type === 'bike' || section.type === 'vlille')" class="itinerary-icon" col-2 text-center>
+            <button color="dark" ion-button clear (click)="openMap(section.to)">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </ion-col>
         </ion-row>
+
         <ion-row *ngIf="section.direction">
           <ion-col class="section-name" offset-2>
             Direction <strong>{{ section.direction }}</strong>

@@ -13,6 +13,7 @@ import { MapPage } from '../pages/map/map';
 import { EventPage } from '../pages/event/event';
 import { ItineraryPage } from '../pages/itinerary/itinerary';
 import { OnboardingPage } from '../pages/onboarding/onboarding';
+import { ItineraryMapPage } from '../pages/itinerary-map/itinerary-map';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { MainNavComponent } from '../components/main-nav/main-nav';
@@ -49,7 +50,8 @@ registerLocaleData(localeFr);
     MapComponent,
     IonSegmentHotfix,
     EventCardComponent,
-    OnboardingPage
+    OnboardingPage,
+    ItineraryMapPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ registerLocaleData(localeFr);
     EventPage,
     TabsComponent,
     ItineraryPage,
-    OnboardingPage
+    OnboardingPage,
+    ItineraryMapPage
   ],
   providers: [
     StatusBar,

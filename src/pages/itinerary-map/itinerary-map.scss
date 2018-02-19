@@ -1,0 +1,11 @@
+page-itinerary-map {
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .leaflet-container {
+      flex: 1;
+    }
+  }
+}
