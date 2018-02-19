@@ -13,6 +13,8 @@ const NAVITIA_API_ENDPOINT = '/coverage/fr-npdc/journeys';
 
 const MAPBOX_DIRECTION_ENDPOINT = '/directions/v5/mapbox';
 
+const DRIVING_COST_PER_KM = 0.1;
+
 @Injectable()
 export class ItineraryService {
 
@@ -49,10 +51,10 @@ export class ItineraryService {
         .then(data => data.routes)
     ]).then(data => {
       return [
-        ...data[0].map(itinerary => this.formatItinerary(itinerary, 'subway')),
+        ...data[0].map(itinerary => this.formatItinerary(itinerary, 'subway', 1.6)),
         ...data[1].map(itinerary => this.formatItinerary(itinerary, 'walk', 0)),
         ...data[2].map(itinerary => this.formatItinerary(itinerary, 'bicycle', 0)),
-        ...data[3].map(itinerary => this.formatItinerary(itinerary, 'car')),
+        ...data[3].map(itinerary => this.formatItinerary(itinerary, 'car', this.computeDrivingCost(itinerary.distance))),
       ]
       .sort((a, b) => a.duration - b.duration)
       .map(itinerary => {
@@ -92,6 +94,12 @@ export class ItineraryService {
     };
 
     return this.navitiaItinerary(from, to, options).toPromise();
+  }
+
+  private computeDrivingCost(distance: number): number {
+    const distanceInKm = distance / 1000;
+
+    return Math.round((distanceInKm * DRIVING_COST_PER_KM) * 10) / 10;
   }
 
   private formatItinerary(itinerary: any, iconName: string, price?: number): any {
