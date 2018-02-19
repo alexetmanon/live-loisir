@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { tileLayer, latLng, marker, icon, point, Marker, LatLng } from 'leaflet';
+import { tileLayer, latLng, marker, icon, point, Marker, LatLng, Map } from 'leaflet';
 
 import { Event } from '../../models/event';
 import { AppSettings } from '../../app/app.settings';
@@ -14,9 +14,11 @@ const ZOOM_DEFAULT = 14;
 })
 export class MapComponent {
 
+  private map: Map;
   private markers: Marker[] = [];
+  private mapCenter: LatLng;
+  private isZoomAndPanDisabled: boolean = false;
 
-  mapCenter: LatLng;
   options = {
     layers: [
       // tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
@@ -43,6 +45,10 @@ export class MapComponent {
     this.options.center = position;
   };
 
+  get center() {
+    return this.mapCenter;
+  }
+
   @Input()
   set events(events: Event[]|Event) {
     if (!events) {
@@ -60,10 +66,42 @@ export class MapComponent {
     return this.markers;
   }
 
+  @Input()
+  set disableZoomAndPan(disable: boolean) {
+    this.isZoomAndPanDisabled = disable;
+
+    if (!this.map) {
+      return;
+    }
+
+    if (this.isZoomAndPanDisabled) {
+      this.map.dragging.disable();
+      this.map.touchZoom.disable();
+      this.map.doubleClickZoom.disable();
+      this.map.scrollWheelZoom.disable();
+    } else {
+      this.map.dragging.enable();
+      this.map.touchZoom.enable();
+      this.map.doubleClickZoom.enable();
+      this.map.scrollWheelZoom.enable();
+    }
+  }
+
   @Output()
   onMarkerClicked = new EventEmitter<Event>();
 
   constructor(private ngZone: NgZone) {}
+
+  onMapReady(map: Map) {
+    this.map = map;
+
+    if (this.isZoomAndPanDisabled) {
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+    }
+  }
 
   /**
    *
@@ -97,26 +135,22 @@ export class MapComponent {
         return icon({
           iconUrl: 'assets/imgs/pin-musee.png',
           iconRetinaUrl: 'assets/imgs/pin-musee@2x.png',
-          iconSize: point(35, 55),
-          iconAnchor: point(32, 27)
+          iconSize: point(35, 55)
         });
 
       case Category.Show:
         return icon({
           iconUrl: 'assets/imgs/pin-theatre.png',
           iconRetinaUrl: 'assets/imgs/pin-theatre@2x.png',
-          iconSize: point(35, 55),
-          iconAnchor: point(32, 27)
+          iconSize: point(35, 55)
         });
 
       default:
         return icon({
           iconUrl: 'assets/imgs/pin-general.png',
           iconRetinaUrl: 'assets/imgs/pin-general@2x.png',
-          iconSize: point(35, 55),
-          iconAnchor: point(32, 27)
+          iconSize: point(35, 55)
         });
     }
   }
-
 }
