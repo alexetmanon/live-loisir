@@ -7,7 +7,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { SuggestionsPage } from '../pages/suggestions/suggestions';
+import { NowPage } from '../pages/now/now';
 import { ListPage } from '../pages/list/list';
 import { MapPage } from '../pages/map/map';
 import { EventPage } from '../pages/event/event';
@@ -39,7 +39,7 @@ registerLocaleData(localeFr);
 @NgModule({
   declarations: [
     MyApp,
-    SuggestionsPage,
+    NowPage,
     ListPage,
     MapPage,
     EventPage,
@@ -63,7 +63,7 @@ registerLocaleData(localeFr);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    SuggestionsPage,
+    NowPage,
     ListPage,
     MapPage,
     EventPage,

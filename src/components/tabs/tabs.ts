@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SuggestionsPage } from '../../pages/suggestions/suggestions';
+import { NowPage } from '../../pages/now/now';
 import { ListPage } from '../../pages/list/list';
 import { MapPage } from '../../pages/map/map';
 
@@ -14,7 +14,7 @@ export class TabsComponent {
   // tabs
   map = MapPage;
   list = ListPage;
-  suggestions = SuggestionsPage;
+  now = NowPage;
 
   onChange(tab: any) {
     this.selectedTabIndex = tab.index;
@@ -27,7 +27,7 @@ export class TabsComponent {
       case 1:
         return 'list-color';
       case 2:
-        return 'suggestions-color';
+        return 'now-color';
       default:
         return '';
     }
