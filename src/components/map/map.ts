@@ -145,6 +145,13 @@ export class MapComponent {
           iconSize: point(35, 55)
         });
 
+      case Category.Concert:
+        return icon({
+          iconUrl: 'assets/imgs/pin-musique.png',
+          iconRetinaUrl: 'assets/imgs/pin-musique@2x.png',
+          iconSize: point(35, 55)
+        });
+
       default:
         return icon({
           iconUrl: 'assets/imgs/pin-general.png',

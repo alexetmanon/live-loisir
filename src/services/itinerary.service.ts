@@ -24,16 +24,24 @@ export class ItineraryService {
     options = options || {};
 
     // if departure is before current time
-    if (options.departure && moment().isAfter(options.departure)) {
-      // we set departure at current time
-      options.departure = new Date().toISOString();
+    if (options.departure) {
+      if (moment().isAfter(options.departure)) {
+        // we set departure at current time
+        options.departure = new Date().toISOString();
+      } else {
+        options.departure = moment(options.departure).toISOString();
+      }
     }
 
     // if the arrival time is before current time
-    if (options.arrival && moment().isAfter(options.arrival)) {
-      // we remove arrival and set departure instead
-      options.arrival = undefined;
-      options.departure = new Date().toISOString();
+    if (options.arrival) {
+      if (moment().isAfter(options.arrival)) {
+        // we remove arrival and set departure instead
+        options.arrival = undefined;
+        options.departure = new Date().toISOString();
+      } else {
+        options.arrival = moment(options.arrival).toISOString()
+      }
     }
 
     return Promise.all([
