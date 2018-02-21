@@ -18,7 +18,8 @@
 
   <div class="event-location">
     <ion-icon name="pin" color="dark"></ion-icon>
-    {{ event.location.address }}
+    <span *ngIf="event.location && event.location.address">{{ event.location.address }}</span>
+    <em *ngIf="!event.location?.address">Aucune adresse disponible</em>
   </div>
 
   <div class="event-card-button" margin-top>

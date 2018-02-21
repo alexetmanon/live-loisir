@@ -26,7 +26,10 @@
       <ion-col col-1 text-center>
         <ion-icon name="pin"></ion-icon>
       </ion-col>
-      <ion-col>{{ event.location.address }}</ion-col>
+      <ion-col *ngIf="event.location && event.location.address">{{ event.location.address }}</ion-col>
+      <ion-col *ngIf="!event.location?.address">
+        <em>Aucune adresse disponible</em>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
