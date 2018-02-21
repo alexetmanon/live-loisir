@@ -42,8 +42,20 @@
         <p>Calcul des itinéraires en cours</p>
       </div>
 
-      <ion-list>
-        <ion-item *ngFor="let itinerary of forwardItineraries" detail-push>
+      <ion-list *ngIf="forwardItineraries">
+        <!-- no public transport -->
+        <ion-item *ngIf="!hasPublicTransport(forwardItineraries)" class="no-public-transport">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon name="subway"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">Aucun résultat</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item *ngFor="let itinerary of forwardItineraries; let i = index" [ngClass]="{'shorter': i === 0}">
           <ion-grid no-padding>
             <ion-row align-items-center>
               <ion-col class="itinerary-icon" col-2 text-center>
@@ -67,8 +79,20 @@
         <p>Calcul des itinéraires en cours</p>
       </div>
 
-      <ion-list>
-        <ion-item *ngFor="let itinerary of backwardItineraries" detail-push>
+      <ion-list *ngIf="backwardItineraries">
+        <!-- no public transport -->
+        <ion-item *ngIf="!hasPublicTransport(backwardItineraries)" class="no-public-transport">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon name="subway"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">Aucun résultat</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item *ngFor="let itinerary of backwardItineraries" [ngClass]="{'shorter': i === 0}">
           <ion-grid no-padding>
             <ion-row align-items-center>
               <ion-col class="itinerary-icon" col-2 text-center>

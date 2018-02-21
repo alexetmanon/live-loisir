@@ -100,4 +100,12 @@ export class EventPage {
       itineraryDirection: <string>(this.itineraryDirection) // bugfix ion-segment bad varible type
     });
   }
+
+  hasPublicTransport(itineraries: any[]): boolean {
+    if (!itineraries) {
+      return false;
+    }
+
+    return itineraries.filter(itinerary => itinerary.type === 'public_transport').length > 0;
+  }
 }

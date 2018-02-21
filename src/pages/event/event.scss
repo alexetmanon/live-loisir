@@ -24,7 +24,7 @@ page-event {
     .item {
       padding-left: 0;
 
-      &:first-child {
+      &.shorter {
         color: color($colors, primary);
         font-weight: bold;
       }
@@ -41,6 +41,15 @@ page-event {
     .itinerary-duration,
     .itinerary-price {
       font-size: 14px;
+    }
+
+    .no-public-transport {
+      color: color($colors, danger);
+      font-weight: bold;
+
+      .input-wrapper {
+        margin-right: 75px;
+      }
     }
   }
 
