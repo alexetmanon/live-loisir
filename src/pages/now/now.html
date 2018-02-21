@@ -2,6 +2,41 @@
   <main-nav></main-nav>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <div class="now-header">
+    <ion-icon color="danger" name="time"></ion-icon>
+    Je veux sortir maintenant !
+  </div>
 
+  <div class="content-loader" *ngIf="!events">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement des évènements en cours</p>
+  </div>
+
+  <ion-list padding-vertical>
+    <ion-item *ngFor="let event of events" (click)="onClick(event)">
+      <ion-thumbnail item-start>
+        <img [src]="event.image">
+
+        <div class="event-date">
+          <ion-icon name="ios-arrow-forward" color="primary"></ion-icon>
+          {{ event.endDate | date:'dd/MM':'':'fr' }}
+        </div>
+      </ion-thumbnail>
+
+      <h3 class="event-category">{{ event.category || "Évènement" }}</h3>
+      <h2 class="event-title">{{ event.title }}</h2>
+      <p class="event-description">{{ event.description }}</p>
+
+      <div class="event-time" *ngIf="event.startTime">
+        <ion-icon name="time" color="primary"></ion-icon>
+        {{ event.startTime | date:'shortTime':'':'fr' }} - {{ event.endTime | date:'shortTime':'':'fr' }}
+      </div>
+
+      <div class="event-location">
+        <ion-icon name="pin" color="primary"></ion-icon>
+        {{ event.location.address }}
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
