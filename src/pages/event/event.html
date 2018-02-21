@@ -7,6 +7,12 @@
 <ion-content>
   <div class="event-image" [ngStyle]="{'background-image': 'url(' + event.image + ')'}"></div>
   <ion-grid class="event-details" padding>
+    <ion-row *ngIf="event.date">
+      <ion-col col-1 text-center>
+        <ion-icon name="calendar"></ion-icon>
+      </ion-col>
+      <ion-col>{{ event.date | date:'EEEE d MMMM':'':'fr' }}</ion-col>
+    </ion-row>
     <ion-row>
       <ion-col col-1 text-center>
         <ion-icon name="time"></ion-icon>

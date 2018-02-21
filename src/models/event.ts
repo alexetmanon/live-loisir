@@ -4,6 +4,7 @@ import { EventRate } from './event-rate';
 import { EventTiming } from './event-timing';
 
 export class Event {
+  date: Date;
   startTime: Date;
   endTime: Date;
 

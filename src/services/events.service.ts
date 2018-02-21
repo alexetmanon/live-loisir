@@ -106,10 +106,14 @@ export class EventsService {
 
     let todayTiming = event.timings.filter(timing => current.isSame(timing.start, 'day') && current.isSame(timing.end, 'day'));
 
+    // set start/end for today
     if (todayTiming.length >= 1) {
       event.startTime = todayTiming[0].start;
       event.endTime = todayTiming[0].end;
     }
+
+    // set event date to display in event detail page
+    event.date = date;
 
     return event;
   }
