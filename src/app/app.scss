@@ -28,7 +28,8 @@
 }
 
 // loader
-.content-loader {
+.content-loader,
+.content-empty {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -46,7 +47,15 @@
   }
 
   p {
-    margin-bottom: 0;
+    margin: 0;
+    padding: 16px;
+    text-align: center;
+  }
+}
+
+.content-empty {
+  ion-icon {
+    font-size: 4em;
   }
 }
 
