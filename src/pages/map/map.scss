@@ -1,0 +1,42 @@
+page-map {
+  .content-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba($color: #fff, $alpha: 0.85);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    map {
+      flex: 1 0;
+      display: flex;
+
+      .leaflet-container {
+        flex: 1;
+      }
+    }
+
+    ion-fab[top] {
+      top: 54px;
+    }
+
+    .fab ion-icon {
+      color: color($colors, dark);
+    }
+  }
+
+  event-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+}

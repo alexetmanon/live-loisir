@@ -1,0 +1,3 @@
+<ion-segment [(ngModel)]="currentDay" color="primary" (ionChange)="onChanged($event.value)">
+  <ion-segment-button *ngFor="let event of events" value="{{ event.dayNumber }}">{{ event.dayName }}</ion-segment-button>
+</ion-segment>

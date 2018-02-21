@@ -1,0 +1,63 @@
+page-event {
+  .event-image {
+    height: 140px;
+    background-color: rgba(237, 237, 237, 0.41);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .event-details {
+    ion-icon {
+      font-size: 1.5em;
+    }
+  }
+
+  .itinerary-selector {
+    background-color: rgba(237, 237, 237, 0.41);
+  }
+
+  .event-itineraries {
+    .list {
+      margin-bottom: 0;
+    }
+
+    .item {
+      padding-left: 0;
+
+      &.shorter {
+        color: color($colors, primary);
+        font-weight: bold;
+      }
+    }
+
+    .itinerary-icon ion-icon {
+      font-size: 1.6em;
+    }
+
+    .itinerary-price {
+      padding-right: 20px !important;
+    }
+
+    .itinerary-duration,
+    .itinerary-price {
+      font-size: 14px;
+    }
+
+    .no-public-transport {
+      color: color($colors, danger);
+      font-weight: bold;
+
+      .input-wrapper {
+        margin-right: 75px;
+      }
+    }
+  }
+
+  map {
+    height: 140px;
+
+    .leaflet-container {
+      height: 100%;
+    }
+  }
+}

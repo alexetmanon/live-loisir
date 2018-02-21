@@ -1,0 +1,68 @@
+page-itinerary {
+  .event-details {
+    padding: 0;
+
+    h1 {
+      font-size: 20px;
+      font-weight: normal;
+      margin: 0;
+      padding: 8px;
+    }
+
+    ion-icon {
+      font-size: 1.6em;
+    }
+
+    .event-image {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .event-address {
+      padding: 0 0 0 4px;
+    }
+  }
+
+  .itinerary-details {
+    .list-header {
+      font-size: 18px;
+      margin-bottom: 0;
+
+      .itinerary-starttime {
+        margin-top: 4px;
+        font-size: 10px;
+      }
+    }
+
+    .itinerary-direction {
+      font-size: 18px;
+    }
+
+    .itinerary-icon ion-icon {
+      font-size: 1.5em;
+    }
+
+    .itinerary-price {
+      padding-right: 20px !important;
+    }
+
+    .itinerary-duration,
+    .itinerary-price,
+    .section-name {
+      font-size: 14px;
+    }
+
+    .itinerary-warning {
+      color: color($colors, danger);
+      font-size: 12px;
+
+      & > * {
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+}

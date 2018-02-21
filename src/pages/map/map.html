@@ -1,0 +1,22 @@
+<ion-header>
+  <main-nav></main-nav>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <day-selector [events]="dayEvents"></day-selector>
+    <map [events]="events" [center]="mapCenter" (onMarkerClicked)="onMarkerClicked($event)"></map>
+    <ion-fab top right>
+      <button ion-fab color="light" (click)="refreshLocation()">
+        <ion-icon *ngIf="!isLocationRefreshing" name="locate"></ion-icon>
+        <ion-spinner *ngIf="isLocationRefreshing"  name="crescent"></ion-spinner>
+      </button>
+    </ion-fab>
+  </div>
+  <event-card [event]="selectedEvent"></event-card>
+
+  <div class="content-loader" *ngIf="!events">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Chargement des évènements en cours</p>
+  </div>
+</ion-content>

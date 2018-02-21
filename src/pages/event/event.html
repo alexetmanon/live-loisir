@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{ event.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="event-image" [ngStyle]="{'background-image': 'url(' + event.image + ')'}"></div>
+  <ion-grid class="event-details" padding>
+    <ion-row>
+      <ion-col col-1 text-center>
+        <ion-icon name="time"></ion-icon>
+      </ion-col>
+      <ion-col *ngIf="event.startTime">{{ event.startTime | date:'shortTime':'':'fr' }} - {{ event.endTime | date:'shortTime':'':'fr' }}</ion-col>
+      <ion-col *ngIf="!event.startTime">
+        <em>Aucun horaire disponible</em>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-1 text-center>
+        <ion-icon name="list"></ion-icon>
+      </ion-col>
+      <ion-col>{{ event.longDescription }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-1 text-center>
+        <ion-icon name="pin"></ion-icon>
+      </ion-col>
+      <ion-col *ngIf="event.location && event.location.address">{{ event.location.address }}</ion-col>
+      <ion-col *ngIf="!event.location?.address">
+        <em>Aucune adresse disponible</em>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-segment [(ngModel)]="itineraryDirection" class="itinerary-selector" color="dark">
+    <ion-segment-button value="forward">Trajet aller</ion-segment-button>
+    <ion-segment-button value="backward">Trajet retour</ion-segment-button>
+  </ion-segment>
+
+  <div class="event-itineraries" [ngSwitch]="itineraryDirection">
+    <div *ngSwitchCase="'forward'">
+      <div class="content-loader" *ngIf="!forwardItineraries" padding>
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+        <p>Calcul des itinéraires en cours</p>
+      </div>
+
+      <ion-list *ngIf="forwardItineraries">
+        <!-- no public transport -->
+        <ion-item *ngIf="!hasPublicTransport(forwardItineraries)" class="no-public-transport">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon name="subway"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">Aucun résultat</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item *ngFor="let itinerary of forwardItineraries; let i = index" [ngClass]="{'shorter': i === 0}">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon [name]="itinerary.icon"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">{{ itinerary.duration }}</ion-col>
+              <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <button color="dark" ion-button clear item-end icon-end (click)="openItinerary(itinerary)">
+            Choisir
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'backward'">
+      <div class="content-loader" *ngIf="!backwardItineraries" padding>
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+        <p>Calcul des itinéraires en cours</p>
+      </div>
+
+      <ion-list *ngIf="backwardItineraries">
+        <!-- no public transport -->
+        <ion-item *ngIf="!hasPublicTransport(backwardItineraries)" class="no-public-transport">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon name="subway"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">Aucun résultat</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item *ngFor="let itinerary of backwardItineraries" [ngClass]="{'shorter': i === 0}">
+          <ion-grid no-padding>
+            <ion-row align-items-center>
+              <ion-col class="itinerary-icon" col-2 text-center>
+                <ion-icon [name]="itinerary.icon"></ion-icon>
+              </ion-col>
+              <ion-col class="itinerary-duration">{{ itinerary.duration }}</ion-col>
+              <ion-col class="itinerary-price" text-right>{{ itinerary.price }}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <button color="dark" ion-button clear item-end icon-end (click)="openItinerary(itinerary)">
+            Choisir
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <map [events]="event" [center]="eventMapCenter" [disableZoomAndPan]="true"></map>
+</ion-content>

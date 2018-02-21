@@ -1,0 +1,5 @@
+<ion-tabs (ionChange)="onChange($event)" [color]="tabColor()">
+  <ion-tab [root]="map" tabTitle="Carte" tabIcon="pin"></ion-tab>
+  <ion-tab [root]="list" tabTitle="Liste" tabIcon="list"></ion-tab>
+  <ion-tab [root]="now" tabTitle="Maintenant" tabIcon="bulb"></ion-tab>
+</ion-tabs>

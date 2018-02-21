@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{ title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div
+      leaflet
+      [leafletOptions]="options"
+      [leafletLayers]="layers"
+    ></div>
+  </div>
+</ion-content>

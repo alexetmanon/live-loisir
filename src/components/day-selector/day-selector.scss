@@ -1,0 +1,16 @@
+day-selector {
+  display: block;
+
+  // fix segment design
+  .segment-md-primary .segment-button {
+    color: color($colors, dark);
+  }
+
+  .segment-md-primary .segment-button.activated,
+  .segment-md-primary .segment-button.segment-activated {
+    border-color: color($colors, primary);
+    background-color: color($colors, primary);
+    color: #fff;
+    opacity: 1;
+  }
+}

@@ -14,3 +14,47 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@import '../../node_modules/leaflet/dist/leaflet';
+
+// fix bar button padding
+// @see https://github.com/ionic-team/ionic/issues/8607
+.bar-button-md {
+  margin-left: 0.8rem !important;
+  margin-right: 0.8rem !important;
+}
+
+.bar-button-ios {
+  padding: 0 5px !important;
+}
+
+// loader
+.content-loader {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ion-spinner,
+  svg {
+    width: 50px;
+    height: 50px;
+
+    circle {
+      stroke-width: 5px;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.bg-green {
+  background-color: $live-green;
+  color: color($colors, light);
+}
+
+.bg-green-light {
+  background-color: $live-green-light;
+}
