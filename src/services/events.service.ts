@@ -12,6 +12,7 @@ import { AppSettings } from '../app/app.settings';
 import * as moment from 'moment';
 
 const EVENTS_END_POINT = '/events/7days';
+const NOW_EVENTS_END_POINT = '/events/now';
 
 @Injectable()
 export class EventsService {
@@ -33,7 +34,7 @@ export class EventsService {
         catchError(error => {
           console.error(error);
 
-          return error;
+          return Observable.throw(error);
         })
       )
       .subscribe((dayEvents: DayEvents[]) => {
@@ -111,5 +112,29 @@ export class EventsService {
     }
 
     return event;
+  }
+
+  /**
+   *
+   */
+  getNowEvents(): Observable<Event[]> {
+    return this.http
+      .get(`${AppSettings.API_BASE}${NOW_EVENTS_END_POINT}`)
+      .pipe(
+        map(data => <Event[]>data),
+        map(events => {
+          let today = new Date();
+
+          return events
+            .map(event => this.populateStartAndEndTime(event, today))
+            // EXTREMLY DIRTY TRICK TO FIX API BUG
+            .filter(event => event.timings.length === 0 || event.startTime);
+        }),
+        catchError(error => {
+          console.error(error);
+
+          return Observable.throw(error);
+        })
+      );
   }
 }
