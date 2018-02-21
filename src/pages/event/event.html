@@ -11,7 +11,10 @@
       <ion-col col-1 text-center>
         <ion-icon name="time"></ion-icon>
       </ion-col>
-      <ion-col>{{ event.startDate | date:'EEEE d MMMM':'':'fr' }} <span *ngIf="event.startTime">{{ event.startTime | date:'shortTime':'':'fr' }} - {{ event.endTime | date:'shortTime':'':'fr' }}</span></ion-col>
+      <ion-col *ngIf="event.startTime">{{ event.startTime | date:'shortTime':'':'fr' }} - {{ event.endTime | date:'shortTime':'':'fr' }}</ion-col>
+      <ion-col *ngIf="!event.startTime">
+        <em>Aucun horaire disponible</em>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-1 text-center>
