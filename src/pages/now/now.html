@@ -8,12 +8,17 @@
     Je veux sortir maintenant !
   </div>
 
-  <div class="content-loader" *ngIf="!events">
+  <div class="content-loader" *ngIf="events === undifined">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
     <p>Chargement des évènements en cours</p>
   </div>
 
-  <ion-list padding-vertical>
+  <div class="content-empty" *ngIf="events && events.length === 0">
+      <ion-icon name="ios-alert-outline" color="dark"></ion-icon>
+      <p>Aucun évènement ne débute dans les prochaines heures</p>
+    </div>
+
+  <ion-list *ngIf="events && events.length > 0" padding-vertical>
     <ion-item *ngFor="let event of events" (click)="onClick(event)">
       <ion-thumbnail item-start>
         <img [src]="event.image">
